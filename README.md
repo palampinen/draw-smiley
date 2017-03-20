@@ -1,25 +1,30 @@
-Ionic App Base
+Smileys
 =====================
 
-A starting project for Ionic that optionally supports using custom SCSS.
+Smiley drawing tool and feed.
 
-## Using this project
+Try it in [smileys.top](http://smileys.top)
 
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
+## Development
+```bash
+git clone https://github.com/palampinen/draw-smiley.git
+cd draw-smiley
+npm install
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+cp www/config.example.js config.js
+```
+Fill www/config.js with your Firebase credentials
 
 ```bash
-$ npm install -g ionic
+ionic serve
 ```
 
-Then run: 
+## Tech
+* UI [Ionic Framework](http://ionicframework.com/) and Angular1.
 
-```bash
-$ ionic start myProject tabs
-```
+* Firebase as database and for hosting
 
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
+* Drawing [sketch.js](intridea.github.io/sketch.js/)
 
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
+## Licence
+Licensed under the [MIT license](http://opensource.org/licenses/MIT).
