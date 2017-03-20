@@ -19,14 +19,14 @@ Fill www/config.js with your Firebase credentials
 
 ```bash
 ionic serve
-```
+``
 
 ## Tech
 * UI [Ionic Framework](http://ionicframework.com/) and Angular1.
 
 * Firebase as database and for hosting
 
-* Drawing [sketch.js](intridea.github.io/sketch.js/)
+* Drawing [sketch.js](http://intridea.github.io/sketch.js/)
 
 ## Licence
 Licensed under the [MIT license](http://opensource.org/licenses/MIT).
