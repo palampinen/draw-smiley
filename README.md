@@ -5,7 +5,7 @@ Smiley drawing tool and feed.
 
 Try it in [smileys.top](http://smileys.top)
 
-![Smileys](https://raw.githubusercontent.com/palampinen/draw-smiley/master/screenshot.png)
+![Smileys](https://raw.githubusercontent.com/palampinen/draw-smiley/master/smiley-screenshot.png)
 
 ## Development
 ```bash
