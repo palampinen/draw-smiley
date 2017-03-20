@@ -1,0 +1,148 @@
+.view--draw {
+    background: $stable;
+
+  .button-bar {
+    z-index: 2;
+    position: relative;
+    animation: drop-in 0.5s;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 0px 1px rgba(0, 0, 0, 0.4);
+    & > .button {
+      border-radius: 0;
+      border: none;
+      line-height: 60px;
+      &:before {
+        position: relative;
+        margin-top: 5px;
+      }
+      &.active {
+        box-shadow: inset 0 -3px 0 $royal;
+      }
+    }
+    &.fixed-bottom {
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
+      position: fixed;
+      bottom: 0;
+      animation: drop-from-bottom 0.5s;
+    }
+  }
+
+  .scroll {
+    min-height: calc(100vh - 112px);
+  }
+
+  .draw-container, .draw-area {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .draw-area {
+    top: $bar-height;
+    bottom: $bar-height;
+  }
+
+  .draw-area, .start-layer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  .draw {
+    // background: rgba($lightpurple, 0.3);
+    background: $light;
+    border-radius: 10px;
+    // background:#FFF url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAG0lEQVQYlWNIqL7tSwxmSKi+7ctADBhVSBWFAPC8Jjr9JTfmAAAAAElFTkSuQmCC") repeat;
+    display: block;
+    margin: 0 auto;
+    max-width: 90%;
+    cursor: crosshair;
+  }
+
+  .start-layer {
+    flex-direction: column;
+    width:100%;
+    height: 100%;
+    position: absolute;
+    background: rgba($royal, 1);
+    color: #FFF;
+    padding-bottom: 30px;
+    text-align: center;
+    font-size: 2em;
+    font-size: 5vmin;
+    line-height: 1.3;
+    z-index: 101;
+    animation: fade-in 0.2s;
+    span {
+      opacity: 0.4;
+      color: $light;
+      display: block;
+      margin: 20px 0 0;
+    }
+
+    .start-layer-content {
+      animation: scale-in 0.5s;
+    }
+
+    .icon{
+      font-size: 5em;
+      line-height: 1;
+      color: $energized;
+    }
+  }
+
+
+  .draw__colors {
+    position: relative;
+    margin: 0px auto 5px;
+    text-align: center;
+    z-index: 99;
+  }
+
+  .draw__color {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 0 10px;
+    transition: all 0.2s;
+
+    &.active {
+      transform: scale(1.3);
+    }
+
+    &.red { background: $assertive; }
+    &.green { background: $balanced; }
+    &.dark { background: $dark; }
+    &.royal { background: $royal; }
+    &.orange { background: $orange; }
+  }
+
+
+}
+
+@media screen and (min-width: 840px) {
+  .draw {
+    transition: box-shadow 0.3s;
+    &:hover {
+      box-shadow: 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12), 0 2px 4px -1px rgba(0,0,0,.2);
+    }
+  }
+  .button-bar {
+    max-width: 800px;
+    margin: 0 auto;
+    &.fixed-bottom {
+      left: 50%;
+      margin-left: -400px;
+    }
+
+    & > .button {
+      border-radius: 0;
+      border: none;
+    }
+  }
+}

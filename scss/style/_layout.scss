@@ -1,0 +1,47 @@
+.no-border-tabs > .tabs {border-width:0; box-shadow: 0 -3px 0 $royal !important;  border-color:$royal; }
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {margin:0; border-width:0 !important;}
+
+
+.full, .full .scroll {
+  display: block;
+  min-height: 100vh;
+  position: relative;
+}
+
+.pane {
+  background: $light;
+}
+.bar-header, .bar.bar-light {
+  border-width: 0 0 0px 0;
+  border-color: $royal;
+  border-style: solid;
+}
+
+.bar {
+  .button.button-icon {
+    top: 4px;
+  }
+}
+
+
+.main-tab-navigation {
+  .tab-item {
+    .icon {
+      top: -5px;
+      position: relative;
+    }
+    .tab-title {
+      font-weight: bold;
+      top: -13px;
+      position: relative;
+    }
+  }
+}
+
+
+@media screen and (min-width: 840px) {
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}

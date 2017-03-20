@@ -1,0 +1,65 @@
+.intro-page {
+  background: $royal;
+}
+
+
+// Intro
+.intro-title { color: $calm; font-weight: normal; margin-bottom:30px; font-size: 2em; }
+#logo {position: relative;max-width: 40%; margin: 20px auto 25px;text-align: center}
+#smiley {display: block; width: 80%; max-width: 470px; top:20px; position: relative;margin:0 auto 20px;}
+#pen {position:absolute; left:50%; top:10%; max-width:40%; animation:drawSmiley 6s linear infinite; -webkit-animation: drawSmiley 6s linear infinite;}
+
+.name-form {
+  max-width: 300px;
+  margin: 0 auto;
+}
+.account-form {
+  position: relative;
+  top: 50px;
+}
+
+.name-input {
+  background: transparent;
+  .item {
+    background: transparent;
+    padding: 6px;
+    input {
+      text-align: center;
+      color: $energized;
+      font-size: 1.5em;
+      padding-right: 0 !important;
+    }
+  }
+}
+
+.button-save {
+  &:before {
+    transform: scale(0);
+  }
+}
+
+.button-success {
+  .text {
+    transition: transform 0.2s;
+    transform: translate3d(0, 100%, 0);
+    display: inline-block;
+  }
+  &:before {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 30px;
+    font-size: 2.5em;
+    margin: 3px 0 0 -15px;
+    animation: scale-in 0.4s cubic-bezier(0.24, 0.05, 0.61, 1.67);
+    animation-fill-mode: forwards;
+  }
+}
+
+
+@media screen and (min-width: 1024px) {
+  .intro-title {
+    font-size: 4em;
+  }
+}
+

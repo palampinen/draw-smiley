@@ -1,0 +1,46 @@
+
+.date-separator__title {
+  display: none;
+  transform-origin: 0 50%;
+}
+
+&.date-separator {
+  padding-top: 40px !important;
+
+  .lastOfDay {
+    clear: right;
+    margin-bottom: 60px !important;
+  }
+
+  .firstOfDay {
+    clear: left;
+  }
+
+  .date-separator__title {
+    display: block;
+    animation: scale-in 0.5s;
+    clear: left;
+    position: absolute;
+    top: -60px;
+    font-size: 18px;
+    color: #aaa;
+    font-weight: bold;
+    padding: 20px 15px 15px;
+    text-align: center;
+    width: 100%;
+  }
+
+  &.compact {
+    .date-separator__title {
+      text-align: left;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  &.date-separator.compact {
+    .date-separator__title {
+      padding-top: 20px;
+    }
+  }
+}

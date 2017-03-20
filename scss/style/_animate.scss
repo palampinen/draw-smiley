@@ -1,0 +1,77 @@
+@-webkit-keyframes drawSmiley {
+    0% {left:50%; top:10%;}
+    10% {left:53%; top:13%;}
+    20% {left:55%; top:16%;}
+    30% {left:66%; top:8%;}
+    40% {left:63%; top:15%;}
+    50% {left:38%; top:8%;}
+    60% {left:38%; top:20%;}
+    70% {left:25%; top:13%;}
+    80% {left:50%; top:12%;}
+    90% {left:61%; top:11%;}
+    100% {left:50%; top:10%;}
+}
+
+@keyframes drawSmiley {
+    0% {left:50%; top:10%;}
+    10% {left:53%; top:13%;}
+    20% {left:55%; top:16%;}
+    30% {left:66%; top:8%;}
+    40% {left:63%; top:15%;}
+    50% {left:38%; top:8%;}
+    60% {left:38%; top:20%;}
+    70% {left:25%; top:13%;}
+    80% {left:50%; top:12%;}
+    90% {left:61%; top:11%;}
+    100% {left:50%; top:10%;}
+}
+
+@keyframes drop-in {
+  from { transform: translate3d(0, -50%, 0); opacity: 0 }
+  to { transform: translate3d(0, 0, 0); opacity: 1 }
+}
+
+@keyframes drop-from-bottom {
+  from { transform: translate3d(0, 50%, 0); opacity: 0 }
+  to { transform: translate3d(0, 0, 0); opacity: 1 }
+}
+
+@keyframes drop-from-right {
+  from { transform: translate3d(100%, 0, 0); opacity: 0 }
+  to { transform: translate3d(0, 0, 0); opacity: 1 }
+}
+
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+@keyframes scale-in-while-rotated {
+  from { transform: scale(0) rotate(30deg); }
+  to { transform: scale(1) rotate(30deg); }
+}
+
+@keyframes likeAnimation {
+    0% { transform: translate3d(0, 0, 0);}
+    10% { transform: translate3d(-60%, -100%, 0); opacity: 0.95}
+    20% { transform: translate3d(0, -150%, 0); opacity: 0.9}
+    30% { transform: translate3d(60%, -200%, 0); opacity: 0.8}
+    40% { transform: translate3d(0, -250, 0); opacity: 0.7}
+    50% { transform: translate3d(-50%, -300%, 0); opacity: 0.6}
+    60% { transform: translate3d(0, -350%, 0); opacity: 0.5}
+    70% { transform: translate3d(50%, -400%, 0); opacity: 0.4}
+    80% { transform: translate3d(0, -500%, 0); opacity: 0.3}
+    90% { transform: translate3d(40%, -600%, 0); opacity: 0.2}
+    100% { transform: translate3d(0, -800%, 0); opacity: 0; }
+}
+
+
+
+
+
+

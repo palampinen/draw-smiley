@@ -1,0 +1,79 @@
+.button {
+  font-weight: bold;
+}
+
+$round-btn-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
+.button.button-round {
+  height: 56px;
+  width: 56px;
+
+  border: none;
+  border-radius: 50%;
+  -webkit-box-shadow: $round-btn-box-shadow;
+  box-shadow: $round-btn-box-shadow;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  position: fixed;
+
+  transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-transition: all 0.15s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 999;
+  color: $royal;
+
+
+  transform: scale(0);
+  animation: scale-in 0.3s ease;
+  -webkit-animation: scale-in 0.3s ease;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+
+
+  &.activated {
+    -webkit-box-shadow: $round-btn-box-shadow;
+    box-shadow: $round-btn-box-shadow;
+  }
+
+  &:before {
+    line-height: 52px;
+    font-size: 25px;
+  }
+
+
+  &.bottom-right {
+    bottom: 5%;
+    right: 6%;
+  }
+
+
+    //Ripple
+    background-size: 200%;
+    background-position: 50%;
+    -webkit-transition: background 0.25s ease-out;
+    transition: background 0.25s ease-out;
+
+    &:hover,
+    &:active:hover,
+    &:focus {
+      background-color: darken($calm, 6%);
+    }
+
+    @mixin gradient-radial($innerColor,$outerColor) {
+      background-color: $outerColor;
+      background-image: -webkit-gradient(radial, center center, 0, center center, 460, from($innerColor), to($outerColor));
+      background-image: -webkit-radial-gradient(circle, $innerColor, $outerColor);
+      background-image: -moz-radial-gradient(circle, $innerColor, $outerColor);
+      background-image: -o-radial-gradient(circle, $innerColor, $outerColor);
+      background-image: radial-gradient(circle, $innerColor, $outerColor);
+      background-repeat: no-repeat;
+    }
+
+    &:active {
+      //background-color: darken($basic, 6%);
+      @include gradient-radial(rgba(255,255,255,.3) 10%, rgba(255,255,255,.01) 11%);
+      background-size: 1000%;
+    }
+
+
+}
+

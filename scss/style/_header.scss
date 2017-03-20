@@ -1,0 +1,37 @@
+.bar-header {
+  border: 0px !important;
+  border-bottom-color: transparent !important;
+  background-image: none;
+  border-bottom: none;
+  border-radius: 0;
+  background-image: none !important;
+
+  &.bar .button.button-icon {
+    color: #aaa;
+    top: 0px;
+    &:before {
+      font-size: 28px;
+    }
+  }
+
+  .title {
+    font-size: 1.75em !important;
+    font-weight: 500 !important;
+    color: $balanced !important;
+  }
+  .back-text {
+    top: 2px;
+    position: relative;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bar-header {
+    .title {
+      margin-left: 25px;
+      &+ .buttons {
+        right: 25px;
+      }
+    }
+  }
+}

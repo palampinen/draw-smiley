@@ -1,0 +1,42 @@
+
+<ion-view title="Draw your Smiley" hide-nav-bar="true">
+  <ion-content class="view--draw" overflow-scroll="true">
+
+  <div class="button-bar" ng-if="touched">
+    <a class="button button-large  button-light positive icon-left ion-android-create sketch" ng-class="{'active':!eraser}" ng-click="eraser=!eraser" href data-tool="marker" data-size="5">Draw</a>
+    <a class="button button-large button-light energized icon-left ion-android-hand sketch" ng-class="{'active':eraser}" ng-click="eraser=!eraser" href data-tool="eraser" data-size="25">Erase</a>
+  </div>
+
+  <div class="draw-container" ng-if="!loading" ng-click="showContent()">
+    <div class="start-layer" ng-if="!touched">
+      <div class="start-layer-content">
+        <i class="icon">?</i><br />How was your week?<br /><span>Touch to start drawing</span>
+      </div>
+    </div>
+    <div class="draw-area" ng-if="touched">
+
+      <div class="draw__colors">
+        <a
+          href
+          ng-repeat="(index, color) in colors"
+          data-color="{{color.hex}}"
+          ng-class="{active:activeColor === color.name || (!activeColor && index===0)}"
+          ng-click="setColorActive(color.name)"
+          class="sketch draw__color {{color.name}}">
+        </a>
+      </div>
+
+      <canvas id="sketch" width="350" height="350" class="draw"></canvas>
+    </div>
+  </div>
+
+  <div ng-if="loading" class="center stable loading" ><ion-spinner icon="android"></ion-spinner></div>
+
+  <div class="button-bar fixed-bottom" ng-if="touched">
+    <a class="button button-large button-light assertive" ng-click="cancel()">Cancel</a>
+    <a class="button button-large button-balanced" ng-class="{disabled:!touched}" ng-click="saveImg()">Post!</a>
+  </div>
+
+
+  </ion-content>
+</ion-view>

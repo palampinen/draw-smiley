@@ -1,0 +1,30 @@
+
+<ion-view title="Intro" hide-nav-bar="true" class="hide-tabs">
+  <ion-content class="padding intro-page">
+
+  <div class="container">
+    <div id="logo" class="center">
+      <img id="smiley" class="centerimg" src="img/icon-lg.png" />
+      <img id="pen" class="centerimg" src="img/pen.png" />
+    </div>
+
+    <h1 class="center intro-title">Draw Smileys</h1>
+
+    <form class="name-form intro-form" ng-submit="save(user)">
+      <div class="list list-inset name-input">
+        <label class="item item-input">
+          <input type="text" placeholder="Your Name" ng-model="user" />
+        </label>
+      </div>
+
+      <button
+      ng-click="save(user)"
+      class="button button-calm button-block button-save"
+      ng-class="{'button-success ion-android-done':saved, 'icon-right ion-android-close':failed}">
+      <span class="text">Save</span>
+      </button>
+    </form>
+
+  </div>
+  </ion-content>
+</ion-view>

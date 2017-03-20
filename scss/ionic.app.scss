@@ -1,0 +1,40 @@
+
+$light:                           #fff !default;
+$stable:                          #eee !default;
+$positive:                        #46289A !default;
+$calm:                            #CDECE4 !default;
+$balanced:                        #329E41 !default;
+$energized:                       #FFF046 !default;
+$assertive:                       #FF5240 !default;
+$royal:                           #46289A !default;
+$dark:                            #444 !default;
+$lightgrey:                       #EEF3F5;
+$lightpurple:                     #BEC3E6;
+$warmgrey:                        #F2EEE6;
+$orange:                          #FF821E;
+
+$button-calm-text:                $royal;
+$button-energized-text:           $dark;
+$button-border-width:             0px;
+
+$tabs-height: 50px;
+$bar-height:  50px;
+$font-family-sans-serif: 'proxima-nova', '-apple-system', "Helvetica Neue", sans-serif;
+
+$smiley-animation: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@import "scss/style/style";
+
+
+/// .tab-item .icon{color:#FCA519;}
+.loading, ion-infinite-scroll  .icon-refreshing { font-size:300%; color:$royal; }
+.item .badge {right:18px;}
+.center {text-align: center;}
+
+

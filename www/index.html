@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, width=device-width">
+    <meta name="theme-color" content="#46289A">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <link rel="apple-touch-icon" href="app-icon.png">
+    <link rel="icon" href="app-icon.png">
+
+    <title>Smileys</title>
+
+    <!-- <link rel="manifest" href="manifest.json"> -->
+
+    <!-- Typekit -->
+    <script src="https://use.typekit.net/dsm6dxm.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css?v=1.2" rel="stylesheet">
+
+
+    <!-- ionic/angularjs/jquery js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <script src="config.js"></script>
+    <script>
+      // Initialize the Firebase SDK
+      var config = {
+        apiKey: ENV.FIREBASE_API_KEY,
+        authDomain: ENV.FIREBASE_AUTH_DOMAIN,
+        databaseURL: ENV.FIREBASE_DATABASE_URL,
+        storageBucket: ''
+      };
+      firebase.initializeApp(config);
+    </script>
+
+
+    <!-- <script src="https://cdn.firebase.com/libs/angularfire/0.8.2/angularfire.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/sketch.js?v=1.2"></script>
+    <script src="build/templates.js?v=1.2"></script>
+    <script src="js/smiley-app.js?v=1.2"></script>
+    <script src="js/controllers.js?v=1.2"></script>
+    <script src="js/controllers/feed.js?v=1.2"></script>
+    <script src="js/controllers/feed-item.js?v=1.2"></script>
+    <script src="js/controllers/draw.js?v=1.2"></script>
+    <script src="js/services.js?v=1.2"></script>
+
+  </head>
+  <body ng-app="smileyApp">
+
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>
