@@ -34,14 +34,15 @@ angular.module('smileyApp.services', [])
   var prefix = 'smileyApp-'
   return {
     get: function() {
-      if(localStorage.getItem(prefix+'name') == null)
+      if (localStorage.getItem(prefix+'name') == null) {
         return '';
+      }
 
       return localStorage.getItem(prefix+'name');
     },
     save: function(name) {
       // Simple index lookup
-      return localStorage.setItem(prefix+'name',name);
+      return localStorage.setItem(prefix+'name', name);
     },
     lastChecked: function() { // with refresh
       var tmp =  localStorage.getItem(prefix+'lasttime-checked');

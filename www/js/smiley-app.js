@@ -71,6 +71,16 @@ angular.module('smileyApp',
       }
     })
 
+    .state('tab.feedItemForUser', {
+      url: '/user/:userName',
+      views: {
+        'tab-feed': {
+          templateUrl: 'tab-feed-user.html',
+          controller: 'FeedUserCtrl'
+        }
+      }
+    })
+
     .state('tab.feedItem', {
       url: '/feed/:smileyId',
       views: {
