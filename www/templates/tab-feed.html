@@ -1,5 +1,5 @@
 
-<ion-view title="Smileys" class="tabs-item-hide">
+<ion-view title="Smileys" class="tabs-item-hide" hide-back-button="true">
 
     <ion-nav-buttons side="right">
       <a
@@ -14,7 +14,7 @@
         class="button button-icon icon"
         ng-class="{'ion-android-checkbox-blank':compact, 'ion-android-list': !compact}"
       ></a>
-      <a ng-href="#/account" class="button button-icon icon ion-android-person"></a>
+      <a ng-href="#/user/{{userName}}" class="button button-icon icon ion-android-person"></a>
     </ion-nav-buttons>
 
 

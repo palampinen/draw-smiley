@@ -1,6 +1,12 @@
 angular.module('smileyApp.controllers')
 .controller('FeedCtrl', function($scope, SmileyService, $timeout, User, Helpers) {
 
+  $scope.$on("$ionicView.enter", function(){
+    $timeout(function() {
+      $scope.userName = User.get();
+    })
+  });
+
   // Compact mode toggle
   $scope.compact = User.getCompactMode();
   $scope.toggleCompactMode = function() {
