@@ -260,8 +260,9 @@
   .smiley-feed {
     &.compact {
       .smiley {
-        width: calc(14.7vw - 4px); // ???
-        height: 19vw;
+        width: 8vw;
+        width: calc(8vw - 1px); // ???
+        height: 11vw;
       }
     }
   }
