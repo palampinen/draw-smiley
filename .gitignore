@@ -7,5 +7,6 @@ plugins/
 
 .firebaserc
 firebase.json
+firebase-debug.log
 
 www/config.js
