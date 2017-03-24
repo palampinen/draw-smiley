@@ -19,7 +19,7 @@ Fill www/config.js with your Firebase credentials
 
 ```bash
 ionic serve
-``
+```
 
 ## Tech
 * UI [Ionic Framework](http://ionicframework.com/) and Angular1.
