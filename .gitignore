@@ -9,4 +9,6 @@ plugins/
 firebase.json
 firebase-debug.log
 
+*.sublime-*
+
 www/config.js
