@@ -20,11 +20,14 @@ angular.module('smileyApp.controllers')
 
   $scope.loading = false;
 
-  $scope.showContent = function() {
-    $scope.touched = true;
+  $scope.rateWeek = function(rating) {
+    $scope.givenRating = rating;
     $timeout( function() {
-      $('#sketch').sketch({ defaultColor: '#329E41'});
-    }, 10);
+      $scope.touched = true;
+      $timeout( function() {
+        $('#sketch').sketch({ defaultColor: '#329E41'});
+      }, 10);
+    }, 400);
   };
 
   $scope.searchGIF = debounce(function(term) {
@@ -66,6 +69,7 @@ angular.module('smileyApp.controllers')
 
 
   $scope.saveImg = function() {
+    $scope.loading = true;
 
     function toStart() {
       $scope.touched = false;
@@ -77,25 +81,28 @@ angular.module('smileyApp.controllers')
       }, 100);
     }
 
-    if($scope.gif && $scope.selectedGIF) {
-      Smiley.$add({
-        nick: User.get(),
-        added: new Date().getTime(),
-        gif: $scope.selectedGIF,
-        like: 0
-      }).then(toStart);
+    var staticPostData = Object.assign({
+      nick: User.get(),
+      added: new Date().getTime(),
+      like: 0
+    }, $scope.givenRating ? { rate: $scope.givenRating } : {});
+
+    var imageData = {};
+
+    if ($scope.gif && $scope.selectedGIF) {
+      imageData = { gif: $scope.selectedGIF };
     } else {
       var canvas = document.getElementById('sketch'),
       context = canvas.getContext('2d'),
       dataUrl = canvas.toDataURL('image/png', 0.5);
 
       // Show loader
-      $scope.loading = true;
-
-      if (dataUrl != 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAABdElEQVR4nO3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+Bn+3AAEkkD9cAAAAAElFTkSuQmCC') {
-        Smiley.$add({ nick: User.get(), added: new Date().getTime(), img: dataUrl, like: 0 }).then(toStart);
-      }
+      imageData = { img: dataUrl };
     }
+
+    var postData = Object.assign(staticPostData, imageData);
+    Smiley.$add(postData).then(toStart);
+
   }
 
   $scope.cancel = function() {

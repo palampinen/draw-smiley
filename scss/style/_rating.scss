@@ -1,0 +1,25 @@
+.rating {
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 10;
+  opacity: 0.9;
+  background: rgba($calm, 0.4);
+  width: 46px;
+  height: 46px;
+  text-align: center;
+  line-height: 46px;
+  letter-spacing: 2px;
+  border-radius: 50%;
+  white-space: nowrap;
+  font-weight: bold;
+  color: #999;
+  span {
+    color: $royal;
+  }
+
+  .compact & {
+    top: 5px;
+  }
+}

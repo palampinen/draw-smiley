@@ -44,7 +44,8 @@
     bottom: $bar-height;
   }
 
-  .draw-area, .start-layer {
+  .draw-area {
+    animation: fade-in-scale-out 0.8s;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -84,39 +85,6 @@
     max-width: 90%;
     cursor: crosshair;
   }
-
-  .start-layer {
-    flex-direction: column;
-    width:100%;
-    height: 100%;
-    position: absolute;
-    background: rgba($royal, 1);
-    color: #FFF;
-    padding-bottom: 30px;
-    text-align: center;
-    font-size: 2em;
-    font-size: 5vmin;
-    line-height: 1.3;
-    z-index: 101;
-    animation: fade-in 0.2s;
-    span {
-      opacity: 0.4;
-      color: $light;
-      display: block;
-      margin: 20px 0 0;
-    }
-
-    .start-layer-content {
-      animation: scale-in 0.5s;
-    }
-
-    .icon{
-      font-size: 5em;
-      line-height: 1;
-      color: $energized;
-    }
-  }
-
 
   .draw__colors {
     position: relative;

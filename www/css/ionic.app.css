@@ -10028,6 +10028,8 @@ a.button {
   font-size: 0.8em; }
 
 .smiley-feed .badge {
+  top: 1px;
+  right: 0;
   padding: 3px 15px 3px; }
 
 .smiley-feed .like-counter {
@@ -10162,22 +10164,39 @@ a.button {
       animation: drop-from-bottom 0.5s; }
   .view--draw .scroll {
     min-height: calc(100vh - 112px); }
-  .view--draw .draw-container, .view--draw .draw-area {
+  .view--draw .draw-container, .view--draw .draw-area, .view--draw .gif-area {
     z-index: 1;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0; }
-  .view--draw .draw-area {
+  .view--draw .draw-area, .view--draw .gif-area {
     top: 50px;
     bottom: 50px; }
-  .view--draw .draw-area, .view--draw .start-layer {
+  .view--draw .draw-area {
+    animation: fade-in-scale-out 0.8s;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     z-index: 1; }
+  .view--draw .gif-area {
+    overflow: auto;
+    max-width: 600px;
+    margin: auto;
+    padding: 0 1em; }
+  .view--draw .gif-area__search {
+    width: 100%;
+    height: 40px;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    padding: 0 0.5em;
+    border-radius: 3px; }
+  .view--draw .gif-area__image {
+    width: 100%; }
+  .view--draw .gif-area__image--active {
+    border: 4px solid #329E41; }
   .view--draw .draw {
     background: #fff;
     border-radius: 10px;
@@ -10185,31 +10204,6 @@ a.button {
     margin: 0 auto;
     max-width: 90%;
     cursor: crosshair; }
-  .view--draw .start-layer {
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background: #46289a;
-    color: #FFF;
-    padding-bottom: 30px;
-    text-align: center;
-    font-size: 2em;
-    font-size: 5vmin;
-    line-height: 1.3;
-    z-index: 101;
-    animation: fade-in 0.2s; }
-    .view--draw .start-layer span {
-      opacity: 0.4;
-      color: #fff;
-      display: block;
-      margin: 20px 0 0; }
-    .view--draw .start-layer .start-layer-content {
-      animation: scale-in 0.5s; }
-    .view--draw .start-layer .icon {
-      font-size: 5em;
-      line-height: 1;
-      color: #FFF046; }
   .view--draw .draw__colors {
     position: relative;
     margin: 0px auto 5px;
@@ -10257,6 +10251,71 @@ a.button {
   text-align: center;
   margin-top: 45px !important; }
 
+.start-layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #46289a;
+  color: #FFF;
+  padding-bottom: 30px;
+  text-align: center;
+  font-size: 2em;
+  font-size: 5vmin;
+  line-height: 1.3;
+  z-index: 101;
+  animation: fade-in 0.2s; }
+  .start-layer .subtitle {
+    opacity: 0.6;
+    font-weight: bold;
+    display: block;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #fff;
+    display: block;
+    margin: 20px 0 10px; }
+  .start-layer .start-layer-content {
+    animation: scale-in 0.5s; }
+  .start-layer .icon {
+    font-size: 5em;
+    line-height: 1;
+    color: #FFF046; }
+
+.rate-btn {
+  text-decoration: none;
+  color: #46289A;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #CDECE4;
+  display: inline-block;
+  margin: 0 10px;
+  transition: transform 3s;
+  position: relative; }
+  .rate-btn:hover {
+    background: #fff; }
+  .rate-btn.rated {
+    animation: scale-huge 3s;
+    animation-fill-mode: forwards;
+    z-index: 2; }
+    .rate-btn.rated .content {
+      opacity: 0; }
+
+@media screen and (min-width: 1024px) {
+  .rate-btn {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 40px;
+    margin: 20px; } }
+
 .bar-header {
   border: 0px !important;
   border-bottom-color: transparent !important;
@@ -10292,6 +10351,28 @@ a.button {
     height: 40px;
     stroke: #46289A;
     fill: #46289A; }
+
+.rating {
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 10;
+  opacity: 0.9;
+  background: rgba(205, 236, 228, 0.4);
+  width: 46px;
+  height: 46px;
+  text-align: center;
+  line-height: 46px;
+  letter-spacing: 2px;
+  border-radius: 50%;
+  white-space: nowrap;
+  font-weight: bold;
+  color: #999; }
+  .rating span {
+    color: #46289A; }
+  .compact .rating {
+    top: 5px; }
 
 .kpis {
   padding: 15px 30px; }
@@ -10336,7 +10417,7 @@ a.button {
   transform: scale(0);
   animation: scale-in 0.3s ease;
   -webkit-animation: scale-in 0.3s ease;
-  animation-delay: 1.5s;
+  animation-delay: 0.75s;
   animation-fill-mode: forwards;
   background-size: 200%;
   background-position: 50%;
@@ -10463,6 +10544,14 @@ a.button {
   to {
     opacity: 1; } }
 
+@keyframes fade-in-scale-out {
+  from {
+    opacity: 0.9;
+    transform: scale(1.2); }
+  to {
+    opacity: 1;
+    transform: scale(1); } }
+
 @keyframes scale-in {
   from {
     transform: scale(0); }
@@ -10474,6 +10563,12 @@ a.button {
     transform: scale(0) rotate(30deg); }
   to {
     transform: scale(1) rotate(30deg); } }
+
+@keyframes scale-huge {
+  from {
+    transform: scale(1); }
+  to {
+    transform: scale(1000); } }
 
 @keyframes likeAnimation {
   0% {
@@ -10512,9 +10607,6 @@ a.button {
 .loading, ion-infinite-scroll .icon-refreshing {
   font-size: 300%;
   color: #46289A; }
-
-.item .badge {
-  right: 18px; }
 
 .center {
   text-align: center; }

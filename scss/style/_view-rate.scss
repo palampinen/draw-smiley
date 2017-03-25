@@ -1,0 +1,78 @@
+.start-layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+  width:100%;
+  height: 100%;
+  position: absolute;
+  background: rgba($royal, 1);
+  color: #FFF;
+  padding-bottom: 30px;
+  text-align: center;
+  font-size: 2em;
+  font-size: 5vmin;
+  line-height: 1.3;
+  z-index: 101;
+  animation: fade-in 0.2s;
+  .subtitle {
+    opacity: 0.6;
+    font-weight: bold;
+    display: block;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $light;
+    display: block;
+    margin: 20px 0 10px;
+  }
+
+  .start-layer-content {
+    animation: scale-in 0.5s;
+  }
+
+  .icon{
+    font-size: 5em;
+    line-height: 1;
+    color: $energized;
+  }
+}
+
+
+.rate-btn {
+  text-decoration: none;
+  color: $royal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: $calm;
+  display: inline-block;
+  margin: 0 10px;
+  transition: transform 3s;
+  position: relative;
+  &:hover {
+    background: $light;
+  }
+  &.rated {
+    .content {
+      opacity: 0;
+    }
+
+    animation: scale-huge 3s;
+    animation-fill-mode: forwards;
+    z-index: 2;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .rate-btn {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    font-size: 40px;
+    margin: 20px;
+  }
+}

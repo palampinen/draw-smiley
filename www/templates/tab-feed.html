@@ -43,6 +43,7 @@
                 <h2>{{item.nick || '-'}}</h2>
                 <p class="time-ago">{{getTimeAgo(item.added)}}</p>
                 <span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>
+                <span class="rating" ng-if="item.rate"><span>{{item.rate}}</span>/5</span>
               </div>
 
               <a class="item item-image" ng-href="#/feed/{{item.$id}}">

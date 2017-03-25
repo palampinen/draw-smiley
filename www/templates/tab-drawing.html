@@ -8,10 +8,13 @@
     <a class="button button-large button-light energized icon-left ion-ios-videocam sketch" ng-class="{'active': gif}" ng-click="setGIFMode()" href data-tool="gif" data-size="25">GIF</a>
   </div>
 
-  <div class="draw-container" ng-if="!loading" ng-click="showContent()">
+  <div class="draw-container" ng-if="!loading">
     <div class="start-layer" ng-if="!touched">
       <div class="start-layer-content">
-        <i class="icon">?</i><br />How was your week?<br /><span>Touch to start drawing</span>
+        <i class="icon">?</i><br />How was your week?<br /><span class="subtitle">Rate</span>
+        <a href class="rate-btn" ng-class="{rated: rating===givenRating}" ng-repeat="rating in [1,2,3,4,5]" ng-click="rateWeek(rating)">
+          <span class="content">{{rating}}</span>
+        </a>
       </div>
     </div>
     <div class="draw-area" ng-show="touched && !gif">
