@@ -3,8 +3,9 @@
   <ion-content class="view--draw" overflow-scroll="true">
 
   <div class="button-bar" ng-if="touched">
-    <a class="button button-large  button-light positive icon-left ion-android-create sketch" ng-class="{'active':!eraser}" ng-click="eraser=!eraser" href data-tool="marker" data-size="5">Draw</a>
-    <a class="button button-large button-light energized icon-left ion-android-hand sketch" ng-class="{'active':eraser}" ng-click="eraser=!eraser" href data-tool="eraser" data-size="25">Erase</a>
+    <a class="button button-large  button-light positive icon-left ion-android-create sketch" ng-class="{'active':!gif && !eraser}" ng-click="setDrawMode()" href data-tool="marker" data-size="5">Draw</a>
+    <a class="button button-large button-light energized icon-left ion-android-hand sketch" ng-class="{'active':!gif && eraser}" ng-click="setEraserMode()" href data-tool="eraser" data-size="25">Erase</a>
+    <a class="button button-large button-light energized icon-left ion-ios-videocam sketch" ng-class="{'active': gif}" ng-click="setGIFMode()" href data-tool="gif" data-size="25">GIF</a>
   </div>
 
   <div class="draw-container" ng-if="!loading" ng-click="showContent()">
@@ -13,8 +14,7 @@
         <i class="icon">?</i><br />How was your week?<br /><span>Touch to start drawing</span>
       </div>
     </div>
-    <div class="draw-area" ng-if="touched">
-
+    <div class="draw-area" ng-show="touched && !gif">
       <div class="draw__colors">
         <a
           href
@@ -27,6 +27,17 @@
       </div>
 
       <canvas id="sketch" width="350" height="350" class="draw"></canvas>
+    </div>
+    <div class="gif-area" ng-if="touched && gif">
+      <input class="gif-area__search" placeholder="Search GIFs.." type="text" ng-model="searchTerm" ng-change="searchGIF(searchTerm)" />
+      <div class="gif-area__gifs" ng-if="touched && gif">
+        <img
+          class="gif-area__image"
+          ng-class="{'gif-area__image--active': $root.selectedGIF === url}"
+          ng-click="$root.selectedGIF = url"
+          ng-repeat="url in GIFResults"
+          ng-src="{{ url }}" />
+      </div>
     </div>
   </div>
 
