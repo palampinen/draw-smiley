@@ -29,6 +29,17 @@ angular.module('smileyApp.services', [])
     }
   }
 })
+.factory('Giphy', function($http, CONFIG) {
+  return {
+    search: function(term){
+      return $http.get(`http://api.giphy.com/v1/gifs/search?q=${term}&api_key=${CONFIG.giphyAPIKey}`).then(function (results) {
+        return results.data.data.map(function(item) {
+          return item.images.downsized.url;
+        });
+      });
+    }
+  }
+})
 
 .factory('User', function() {
   var prefix = 'smileyApp-'
