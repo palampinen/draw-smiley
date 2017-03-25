@@ -1,27 +1,12 @@
 
 angular.module('smileyApp.controllers')
 
-.controller('DrawCtrl', function($scope, Smiley, $state, $ionicScrollDelegate, $timeout, $http, User) {
+.controller('DrawCtrl', function($scope, Smiley, $state, $ionicScrollDelegate, $timeout, $http, User, Giphy, debounce) {
 
   $scope.$on("$ionicView.leave", function(){
     $scope.givenRating = null;
     $scope.touched = false;
   });
-
-  function debounce(func, wait, immediate) {
-    var timeout;
-    return function() {
-      var context = this, args = arguments;
-      var later = function() {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  };
 
   $scope.loading = false;
 
@@ -36,11 +21,9 @@ angular.module('smileyApp.controllers')
   };
 
   $scope.searchGIF = debounce(function(term) {
-    $http.get(`https://api.giphy.com/v1/gifs/search?q=${term}&api_key=dc6zaTOxFJmzC`).then(function (results) {
-      $scope.GIFResults = results.data.data.map(function(item) {
-        return item.images.downsized.url;
-      });
-    })
+    Giphy.search(term).then(function (urls) {
+      $scope.GIFResults = urls;
+    });
   }, 500);
 
   $scope.GIFResults = [];

@@ -2,6 +2,7 @@
 angular.module('smileyApp',
 [
   'ionic',
+  'debounce',
   'smileyApp.controllers',
   'smileyApp.services',
   'firebase',

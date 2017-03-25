@@ -7,5 +7,6 @@ var ENV = {
 // Angular config
 angular.module('config', [])
 .constant('CONFIG', {
-  fbRoot: '' // Optionally set app database root, eg. 'v1'
+  fbRoot: '', // Optionally set app database root, eg. 'v1'
+  giphyAPIKey: ''
 })
