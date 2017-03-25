@@ -15,6 +15,8 @@
         <a href class="rate-btn" ng-class="{rated: rating===givenRating}" ng-repeat="rating in [1,2,3,4,5]" ng-click="rateWeek(rating)">
           <span class="content">{{rating}}</span>
         </a>
+
+        <a href="#/tab/feed/" class="cancel-link">Cancel</a>
       </div>
     </div>
     <div class="draw-area" ng-show="touched && !gif">
