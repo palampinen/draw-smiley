@@ -11,6 +11,7 @@ Try it in [smileys.top](http://smileys.top)
 ```bash
 git clone https://github.com/palampinen/draw-smiley.git
 cd draw-smiley
+npm install -g ionic
 npm install
 
 cp www/config.example.js www/config.js
