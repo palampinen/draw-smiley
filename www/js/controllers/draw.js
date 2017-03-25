@@ -3,6 +3,11 @@ angular.module('smileyApp.controllers')
 
 .controller('DrawCtrl', function($scope, Smiley, $state, $ionicScrollDelegate, $timeout, $http, User) {
 
+  $scope.$on("$ionicView.leave", function(){
+    $scope.givenRating = null;
+    $scope.touched = false;
+  });
+
   function debounce(func, wait, immediate) {
     var timeout;
     return function() {
@@ -74,6 +79,7 @@ angular.module('smileyApp.controllers')
     function toStart() {
       $scope.touched = false;
       $scope.loading = false;
+      $scope.givenRating = null;
       $state.go('tab.feed');
 
       $timeout(function() {

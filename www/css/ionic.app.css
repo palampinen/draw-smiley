@@ -10270,20 +10270,29 @@ a.button {
   z-index: 101;
   animation: fade-in 0.2s; }
   .start-layer .subtitle {
-    opacity: 0.6;
-    font-weight: bold;
+    opacity: 0.75;
+    font-weight: 500;
     display: block;
     font-size: 20px;
     text-transform: uppercase;
     color: #fff;
     display: block;
-    margin: 20px 0 10px; }
+    margin: 30px 0 10px; }
   .start-layer .start-layer-content {
     animation: scale-in 0.5s; }
   .start-layer .icon {
     font-size: 5em;
     line-height: 1;
     color: #FFF046; }
+
+.cancel-link {
+  display: block;
+  color: #000;
+  opacity: 0.5;
+  font-size: 20px;
+  text-decoration: none;
+  top: 100px;
+  position: relative; }
 
 .rate-btn {
   text-decoration: none;
