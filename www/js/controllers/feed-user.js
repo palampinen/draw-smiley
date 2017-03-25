@@ -41,6 +41,22 @@ angular.module('smileyApp.controllers')
     }, 0);
   }
 
+  $scope.getTotalRatings = function() {
+    var totalRatedPosts = ($scope.smileysFromUser || [])
+    .filter(function(smiley) {
+      return smiley.rate;
+    });
+
+    if (totalRatedPosts.length === 0) {
+      return '-';
+    }
+
+    var avg = (totalRatedPosts || []).reduce(function(acc, smiley) {
+      return acc + (smiley.rate || 0);
+    }, 0) / totalRatedPosts.length;
+
+    return avg.toFixed(1);
+  }
 
 
 
