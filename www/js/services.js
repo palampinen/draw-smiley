@@ -97,7 +97,7 @@ angular.module('smileyApp.services', [])
 
       var agoFormat = 'ddd HH:mm';
       if (diffInDays > 2) {
-        agoFormat = 'ddd d.M. HH:mm'
+        agoFormat = 'ddd D.M. HH:mm'
       }
 
       return moment(ago).format(agoFormat);
