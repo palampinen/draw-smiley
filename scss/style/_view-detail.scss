@@ -5,3 +5,20 @@
   text-align: center;
   margin-top: 45px !important;
 }
+
+
+.item-footer {
+  .action-button  {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 18px;
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    border-radius: 50%;
+    text-align: center;
+    background: $stable;
+  }
+}

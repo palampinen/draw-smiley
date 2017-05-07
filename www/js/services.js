@@ -26,6 +26,9 @@ angular.module('smileyApp.services', [])
     findByUser: function(userName) {
       var query = ref.orderByChild('nick').equalTo(userName);
       return $firebaseArray(query);
+    },
+    remove: function(item) {
+      return item.$remove();
     }
   }
 })

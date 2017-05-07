@@ -14,17 +14,23 @@
           <span class="badge badge-royal" ng-if="smiley.added > lastChecked"> FRESH</span>
         </div>
 
-        <div class="item item-image">
-          <img src="{{smiley.img}}" />
-        </div>
-        <a
-          ng-class="{hasLikes: smiley.like}"
-          class="item item-footer item-icon-left like-counter" href
-          ng-click="smiley.like = smiley.like + 1; smiley.$save(item)">
-          <span class="ion-android-favorite like-animation"></span>
-          <i class="icon ion-android-favorite-outline"></i>
-          <span class="text">{{smiley.like}}</span>
-        </a>
+          <div class="item item-image" back-img="{{smiley.gif || smiley.img}}" ></div>
+          <div class="item item-footer">
+            <a
+              ng-class="{hasLikes: smiley.like}"
+              class="item-icon-left like-counter" href
+              ng-click="smiley.like = smiley.like + 1; smiley.$save()">
+              <span class="ion-android-favorite like-animation"></span>
+              <i class="icon ion-android-favorite-outline"></i>
+              <span class="text">{{smiley.like}}</span>
+            </a>
+              <a
+                href
+                ng-if="userName === smiley.nick"
+                class="action-button ion-android-delete"
+                ng-click="removeItem(smiley)">
+              </a>
+          </div>
         </div>
       </div>
     </div>

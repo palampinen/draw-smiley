@@ -1,6 +1,6 @@
 angular.module('smileyApp.controllers')
 
-.controller('FeedItemCtrl', function($scope, $stateParams, SmileyService, Helpers) {
+.controller('FeedItemCtrl', function($scope, $stateParams, $timeout, $state, SmileyService, Helpers, User) {
 
   // Single Smiley mode
   $scope.loading = true;
@@ -23,4 +23,21 @@ angular.module('smileyApp.controllers')
   });
 
   $scope.getTimeAgo = Helpers.getTimeAgo;
+
+
+  // Remove
+  $scope.userName = User.get();
+
+  $scope.removeItem = function(item) {
+    if (confirm('Remove post from ' + Helpers.getTimeAgo(item.added) + '?')) {
+      $scope.loading = true;
+      SmileyService.remove(item).then(function() {
+        $timeout(function() {
+          $state.go('tab.feed')
+          $scope.loading = false;
+        }, 300)
+      });
+    }
+  };
+
 })
