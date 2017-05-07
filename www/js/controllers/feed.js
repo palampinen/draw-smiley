@@ -93,12 +93,14 @@ angular.module('smileyApp.controllers')
     // console.log(moment(a).toISOString() + ' - ' + moment(b).toISOString(), moment(a).isSame(moment(b), 'day'));
     return a && b && moment(a).isSame(moment(b), 'day');
   }
+
   var today = moment();
   $scope.getDateLabel = function(date) {
     var momentDate = moment(date);
     return momentDate.isSame(today, 'day')
       ? 'Today'
-      : moment(date).format('ddd D.M.');
+      : momentDate.format('ddd D.M.');
+  }
   }
 
 });

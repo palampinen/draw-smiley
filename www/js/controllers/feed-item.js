@@ -15,8 +15,8 @@ angular.module('smileyApp.controllers')
     if (data.nick) {
       var usersSmileysQuery = SmileyService.findByUser(data.nick);
 
-      usersSmileysQuery.$loaded().then(function(data) {
-        $scope.smileysFromUser = data;
+      usersSmileysQuery.$loaded().then(function(userSmileyData) {
+        $scope.smileysFromUser = userSmileyData;
       });
     }
 
