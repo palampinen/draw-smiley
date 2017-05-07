@@ -4,25 +4,26 @@
   .button-bar {
     z-index: 2;
     position: relative;
-    animation: drop-in 0.5s;
+    animation: drop-in 0.5s $smiley-animation;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 0px 1px rgba(0, 0, 0, 0.4);
     & > .button {
       border-radius: 0;
       border: none;
-      line-height: 60px;
+      line-height: 50px;
       &:before {
         position: relative;
-        margin-top: 5px;
+        top: 0px;
       }
       &.active {
-        box-shadow: inset 0 -3px 0 $royal;
+        background: #FFF;
+        box-shadow: inset 0 -2px 0 $royal;
       }
     }
     &.fixed-bottom {
       box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
       position: fixed;
       bottom: 0;
-      animation: drop-from-bottom 0.5s;
+      animation: drop-from-bottom 0.5s $smiley-animation;
     }
   }
 
@@ -45,7 +46,7 @@
   }
 
   .draw-area {
-    animation: fade-in-scale-out 0.8s;
+    animation: fade-in-scale-out 0.5s $smiley-animation;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,40 +56,42 @@
 
   .gif-area {
     overflow: auto;
-    max-width: 600px;
     margin: auto;
-    padding: 0 1em;
+    padding: 0;
+    max-width: 600px;
   }
 
   .gif-area__search {
     width: 100%;
     height: 40px;
-    margin-top: 30px;
-    margin-bottom: 25px;
+    margin: 30px 1em 25px;
+
     padding: 0 0.5em;
     border-radius: 3px;
   }
   .gif-area__image {
     width: 100%;
+    display: block;
+    border: none;
+    padding: 0.5em 1em;
   }
   .gif-area__image--active {
-    border: 4px solid $balanced;
+    background: rgba($balanced, 0.3);
+    background: $calm;
   }
 
   .draw {
-    // background: rgba($lightpurple, 0.3);
     background: $light;
     border-radius: 10px;
-    // background:#FFF url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAG0lEQVQYlWNIqL7tSwxmSKi+7ctADBhVSBWFAPC8Jjr9JTfmAAAAAElFTkSuQmCC") repeat;
     display: block;
     margin: 0 auto;
     max-width: 90%;
     cursor: crosshair;
   }
 
-  .draw__colors {
+  .draw__tools {
     position: relative;
-    margin: 0px auto 5px;
+    margin: -10px auto 5px;
     text-align: center;
     z-index: 99;
   }
@@ -98,7 +101,7 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    margin: 0 10px;
+    margin: 0 8px;
     transition: all 0.2s;
 
     &.active {
@@ -112,8 +115,54 @@
     &.orange { background: $orange; }
   }
 
+  .draw__action {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    background: #999;
+    color: #FFF;
+    font-size: 20px;
+    transition: all 0.2s;
+    position: relative;
+    margin: 0 4px 15px;
+    &.active {
+      background: $dark;
+    }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0 }
+    to { opacity: 1 }
+  }
+
+  .loading-layer {
+    animation: fade-in 0.15s;
+    background: rgba(0,0,0, .5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    svg {
+      width: 40px;
+      height: 40px;
+      stroke: $light;
+      fill: $light;
+    }
+  }
+
+
 
 }
+
+
 
 @media screen and (min-width: 840px) {
   .draw {
@@ -133,6 +182,31 @@
     & > .button {
       border-radius: 0;
       border: none;
+    }
+  }
+
+  .view--draw {
+    .draw__tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 40px;
+      margin: -15px auto 15px;
+      &>div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .draw__action {
+        margin-bottom: 0;
+        &.last {
+          margin-right: 25px;
+        }
+      }
+    }
+
+    .gif-area__image {
+      padding: 1em;
     }
   }
 }

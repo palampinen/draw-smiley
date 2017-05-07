@@ -3,9 +3,8 @@
   <ion-content class="view--draw" overflow-scroll="true">
 
   <div class="button-bar" ng-if="touched">
-    <a class="button button-large  button-light positive icon-left ion-android-create sketch" ng-class="{'active':!gif && !eraser}" ng-click="setDrawMode()" href data-tool="marker" data-size="5">Draw</a>
-    <a class="button button-large button-light energized icon-left ion-android-hand sketch" ng-class="{'active':!gif && eraser}" ng-click="setEraserMode()" href data-tool="eraser" data-size="25">Erase</a>
-    <a class="button button-large button-light energized icon-left ion-ios-videocam sketch" ng-class="{'active': gif}" ng-click="setGIFMode()" href data-tool="gif" data-size="25">GIF</a>
+    <a class="button button-light positive icon-left ion-android-happy" ng-class="{active: mode === modes.DRAW}" ng-click="setDrawMode()" href>Smiley</a>
+    <a class="button button-light energized icon-left ion-ios-videocam" ng-class="{active: mode === modes.GIF}" ng-click="setGIFMode()" href>GIF</a>
   </div>
 
   <div class="draw-container" ng-if="!loading">
@@ -19,23 +18,44 @@
         <a href="#/tab/feed/" class="cancel-link">Cancel</a>
       </div>
     </div>
-    <div class="draw-area" ng-show="touched && !gif">
-      <div class="draw__colors">
-        <a
-          href
-          ng-repeat="(index, color) in colors"
-          data-color="{{color.hex}}"
-          ng-class="{active:activeColor === color.name || (!activeColor && index===0)}"
-          ng-click="setColorActive(color.name)"
-          class="sketch draw__color {{color.name}}">
-        </a>
+    <div class="draw-area" ng-show="touched && mode === modes.DRAW">
+      <div class="draw__tools">
+        <div>
+          <a
+            ng-click="setDrawMode()"
+            href
+            data-tool="marker"
+            data-size="5"
+            class="draw__action sketch ion-paintbrush"
+            ng-class="{active: !eraser}"
+          ></a>
+          <a
+            ng-click="setEraserMode()"
+            href
+            data-tool="eraser"
+            data-size="25"
+            class="draw__action sketch ion-android-hand last"
+            ng-class="{active: eraser}"
+          ></a>
+        </div>
+        <div>
+          <a
+            href
+            ng-repeat="(index, color) in colors"
+            data-color="{{color.hex}}"
+            ng-class="{active:activeColor === color.name || (!activeColor && index===0)}"
+            ng-click="setColorActive(color.name)"
+            class="sketch draw__color {{color.name}}">
+          </a>
+        </div>
+
       </div>
 
-      <canvas id="sketch" width="350" height="350" class="draw"></canvas>
+      <canvas id="sketch" width="350" height="350" class="draw" ng-if="!clearingCanvas"></canvas>
     </div>
-    <div class="gif-area" ng-if="touched && gif">
+    <div class="gif-area" ng-if="touched && mode === modes.GIF">
       <input class="gif-area__search" placeholder="Search GIFs.." type="text" ng-model="searchTerm" ng-change="searchGIF(searchTerm)" />
-      <div class="gif-area__gifs" ng-if="touched && gif">
+      <div class="gif-area__gifs" ng-if="touched && mode === modes.GIF">
         <img
           class="gif-area__image"
           ng-class="{'gif-area__image--active': $root.selectedGIF === url}"
@@ -44,13 +64,14 @@
           ng-src="{{ url }}" />
       </div>
     </div>
+
   </div>
 
   <div ng-if="loading" class="center stable loading" ><ion-spinner icon="android"></ion-spinner></div>
 
   <div class="button-bar fixed-bottom" ng-if="touched">
-    <a class="button button-large button-light assertive" ng-click="cancel()">Cancel</a>
-    <a class="button button-large button-balanced" ng-class="{disabled:!touched}" ng-click="saveImg()">Post!</a>
+    <a class="button button-light assertive" ng-click="cancel()">Cancel</a>
+    <a class="button button-balanced" ng-class="{disabled:!touched}" ng-click="saveImg()">Post!</a>
   </div>
 
 
