@@ -33,6 +33,17 @@ angular.module('smileyApp.services', [])
   }
 })
 
+.factory('SmileyStorage', function() {
+  var ref = firebase.storage().ref();
+
+  return {
+    uploadDataUrl: function(file) {
+      return ref.child('images/' + file.name).putString(file.data, 'data_url');
+    }
+  };
+
+})
+
 .factory('User', function() {
   var prefix = 'smileyApp-'
   return {
@@ -104,6 +115,9 @@ angular.module('smileyApp.services', [])
       }
 
       return moment(ago).format(agoFormat);
+    composeFileName: function(time, userName) {
+      var formattedUserName = userName.replace(/ /g, '-');
+      return 'smiley-' + formattedUserName + '-' + time + '.png'
     }
   }
 

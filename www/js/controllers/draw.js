@@ -93,26 +93,36 @@ angular.module('smileyApp.controllers')
       like: 0
     }, $scope.givenRating ? { rate: $scope.givenRating } : {});
 
-    var imageData = {};
+    var imageData = {}, postData;
 
-    if ($scope.gif && $scope.selectedGIF) {
+    if ($scope.mode === modes.GIF && $scope.selectedGIF) {
       imageData = { gif: $scope.selectedGIF };
+      postData = Object.assign(staticPostData, imageData);
+
+      Smiley.$add(postData).then(toStart);
     } else {
+      // Transform canvas to data url
       var canvas = document.getElementById('sketch'),
       context = canvas.getContext('2d'),
-      dataUrl = canvas.toDataURL('image/png', 0.5);
+      dataUrl = canvas.toDataURL('image/png', 0.4);
 
-      // Show loader
-      imageData = { img: dataUrl };
+      // Upload Image to Firebase Storage
+      SmileyStorage.uploadDataUrl({
+        name: Helpers.composeFileName(staticPostData.added, staticPostData.nick),
+        data: dataUrl
+      })
+      .then(function(snapshot) {
+        // Save Smiley to Firebase with Storage Image URL
+        imageData = { img: snapshot.downloadURL };
+        postData = Object.assign(staticPostData, imageData);
+
+        Smiley.$add(postData).then(toStart);
+      });
     }
-
-    var postData = Object.assign(staticPostData, imageData);
-    Smiley.$add(postData).then(toStart);
-
   }
 
   $scope.cancel = function() {
     $state.go('tab.feed')
   }
 
-})
+});

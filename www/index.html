@@ -38,7 +38,7 @@
         apiKey: ENV.FIREBASE_API_KEY,
         authDomain: ENV.FIREBASE_AUTH_DOMAIN,
         databaseURL: ENV.FIREBASE_DATABASE_URL,
-        storageBucket: ''
+        storageBucket: ENV.FIREBASE_STORAGE_BUCKET || ''
       };
       firebase.initializeApp(config);
     </script>
