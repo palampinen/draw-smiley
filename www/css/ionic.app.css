@@ -10164,14 +10164,14 @@ a.button {
       animation: drop-from-bottom 0.5s; }
   .view--draw .scroll {
     min-height: calc(100vh - 112px); }
-  .view--draw .draw-container, .view--draw .draw-area, .view--draw .gif-area {
+  .view--draw .draw-container, .view--draw .draw-area, .view--draw .gif-area, .view--draw .faceapp-area {
     z-index: 1;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0; }
-  .view--draw .draw-area, .view--draw .gif-area {
+  .view--draw .draw-area, .view--draw .gif-area, .view--draw .faceapp-area {
     top: 50px;
     bottom: 50px; }
   .view--draw .draw-area {
@@ -10228,6 +10228,89 @@ a.button {
       background: #46289A; }
     .view--draw .draw__color.orange {
       background: #FF821E; }
+  .view--draw .draw__action {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    background: #FFF;
+    font-size: 20px;
+    color: #888;
+    transition: all 0.2s;
+    position: relative;
+    top: -8px;
+    margin: 0 5px 0; }
+    .view--draw .draw__action.active {
+      color: #46289A; }
+  .view--draw .faceapp-area {
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; }
+    .view--draw .faceapp-area .preview {
+      max-height: 350px;
+      max-width: 100%;
+      margin: 0 auto;
+      display: block;
+      border: none;
+      outline: none; }
+    .view--draw .faceapp-area .camera-button {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      font-size: 50px;
+      background: #FFF;
+      text-align: center;
+      line-height: 100px;
+      border-radius: 5px;
+      color: #977edd; }
+    .view--draw .faceapp-area .camera-button-redo {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+      background: #FFF;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 50%;
+      top: 20px;
+      right: 15px;
+      color: #977edd; }
+    .view--draw .faceapp-area .filter-buttons {
+      margin-top: 10px; }
+      .view--draw .faceapp-area .filter-buttons .button {
+        line-height: 32px;
+        padding: 0 10px;
+        margin: 0 5px; }
+        .view--draw .faceapp-area .filter-buttons .button.active {
+          background: #46289A;
+          color: #FFF; }
+
+@keyframes fade-in {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+  .view--draw .loading-layer {
+    animation: fade-in 0.15s;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; }
+    .view--draw .loading-layer svg {
+      width: 40px;
+      height: 40px;
+      stroke: #fff;
+      fill: #fff; }
 
 @media screen and (min-width: 840px) {
   .draw {

@@ -30,7 +30,7 @@
     min-height: calc(100vh - 112px);
   }
 
-  .draw-container, .draw-area, .gif-area {
+  .draw-container, .draw-area, .gif-area, .faceapp-area {
     z-index: 1;
     position: absolute;
     left: 0;
@@ -39,7 +39,7 @@
     bottom: 0;
   }
 
-  .draw-area, .gif-area {
+  .draw-area, .gif-area, .faceapp-area {
     top: $bar-height;
     bottom: $bar-height;
   }
@@ -111,6 +111,108 @@
     &.royal { background: $royal; }
     &.orange { background: $orange; }
   }
+
+  .draw__action {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    background: #FFF;
+    font-size: 20px;
+    color: #888;
+    transition: all 0.2s;
+    position: relative;
+    top: -8px;
+    margin: 0 5px 0;
+    &.active {
+      color: $royal;
+    }
+  }
+
+  .faceapp-area {
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .preview {
+      max-height: 350px;
+      max-width: 100%;
+      margin: 0 auto;
+      display: block;
+      border: none;
+      outline: none;
+    }
+
+    .camera-button {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      font-size: 50px;
+      background: #FFF;
+      text-align: center;
+      line-height: 100px;
+      border-radius: 5px;
+      color: lighten($royal, 30%);
+    }
+
+    .camera-button-redo {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      font-size: 25px;
+      background: #FFF;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 50%;
+      top: 20px;
+      right: 15px;
+      color: lighten($royal, 30%);
+
+    }
+
+    .filter-buttons {
+      margin-top: 10px;
+      .button {
+        line-height: 32px;
+        padding: 0 10px;
+        margin: 0 5px;
+        &.active {
+          background: $royal;
+          color: #FFF;
+        }
+      }
+    }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0 }
+    to { opacity: 1 }
+  }
+
+  .loading-layer {
+    animation: fade-in 0.15s;
+    background: rgba(0,0,0, .5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    svg {
+      width: 40px;
+      height: 40px;
+      stroke: $light;
+      fill: $light;
+    }
+  }
+
 
 
 }

@@ -1,7 +1,15 @@
 
 angular.module('smileyApp.controllers')
 
-.controller('DrawCtrl', function($scope, Smiley, $state, $ionicScrollDelegate, $timeout, $http, User) {
+.controller('DrawCtrl', function($scope, Smiley, Faceapp, $state, $ionicScrollDelegate, $timeout, $http, User) {
+
+  var modes = {
+    GIF: 'GIF',
+    DRAW: 'DRAW',
+    FACEAPP: 'FACEAPP'
+  };
+  $scope.modes = modes;
+  $scope.mode = modes.DRAW;
 
   $scope.$on("$ionicView.leave", function(){
     $scope.givenRating = null;
@@ -59,7 +67,7 @@ angular.module('smileyApp.controllers')
   }
 
   $scope.setGIFMode = function() {
-    $scope.gif = true;
+    $scope.mode = modes.GIF;
   }
 
   $scope.setEraserMode = function() {
@@ -69,7 +77,7 @@ angular.module('smileyApp.controllers')
 
   $scope.setDrawMode = function() {
     $scope.eraser = false;
-    $scope.gif = false;
+    $scope.mode = modes.DRAW;
   }
 
 
@@ -115,4 +123,124 @@ angular.module('smileyApp.controllers')
     $state.go('tab.feed')
   }
 
+
+  // Faceapp integration
+  $scope.faceappImg = null;
+  $scope.faceappCode = null;
+  $scope.faceappLoading = false;
+
+  $scope.setFaceappMode = function() {
+    $scope.mode = modes.FACEAPP;
+    $timeout(function() {
+      $scope.fireCameraUpload();
+    }, 100);
+  }
+
+  var filters = ['old', 'hot', 'young', 'smile'];
+  $scope.filters = filters;
+  $scope.filter = filters[0];
+  $scope.setFilter = function(filter) {
+    $scope.filter = filter;
+
+    $scope.getImageUrl();
+  }
+
+  $scope.fireCameraUpload =  function() { document.getElementById("camera-upload").click() }
+  $scope.handleFileSelect = function (evt) {
+
+    var f = evt.target.files[0];
+    var reader = new FileReader();
+    $scope.img = true;
+    $scope.faceappLoading = true;
+    $scope.faceappCode = null;
+    $scope.faceappImg = null;
+
+    reader.onload = (function(theFile) {
+      return function(e) {
+        var filePayload = e.target.result;
+
+        var img   = new Image()
+          width   = 300,
+          height  = 300;
+          img.src = filePayload;
+
+
+        img.onload = function() {
+          var tempW = img.width,
+            tempH = img.height,
+            offsetX = 0,
+            offsetY = 0,
+            limit;
+
+          if (tempW < tempH) {
+            offsetY = (tempH-tempW) / 2
+            limit = tempW
+            tempH *= width / tempW;
+            tempW = width;
+          } else {
+            offsetX = (tempW-tempH) / 2
+            limit = tempH
+            tempW *= height / tempH;
+            tempH = height;
+          }
+
+          var canvas = document.createElement('canvas');
+          /// set its dimension to target size
+          canvas.width = width;
+          canvas.height = height;
+
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, offsetX, offsetY, limit, limit, 0, 0, width, height);
+
+
+          /// encode image to data-uri with base64 version of compressed image
+          var resizedImg = canvas.toDataURL('image/png');
+
+          var fd = new FormData();
+          fd.append('file', f);
+
+          var scope = angular.element(document.getElementById("faceapp-view")).scope();
+
+          Faceapp.post(fd, resizedImg)
+          .then(function(res) {
+            console.log(res);
+            $scope.faceappCode = res.data.code;
+            $scope.getImageUrl();
+            $scope.faceappLoading = false;
+          })
+        }
+      };
+    })(f);
+    reader.readAsDataURL(f);
+  }
+
+  $scope.getImageUrl = function() {
+    $scope.faceappLoading = true;
+    var code = $scope.faceappCode;
+    var filter = $scope.filter;
+
+    if (!filter || !code) {
+      return;
+    }
+
+    Faceapp.get(code, filter)
+    .then(function(res) {
+      var urlCreator = window.URL || window.webkitURL;
+      var imageUrl = urlCreator.createObjectURL(res.data);
+      $scope.faceappImg = imageUrl;
+      $scope.faceappLoading = false;
+    })
+  }
+
 })
+.directive('customOnChange', function() {
+  'use strict';
+
+  return {
+    restrict: "A",
+    link: function (scope, element, attrs) {
+      var onChangeFunc = element.scope()[attrs.customOnChange];
+      element.bind('change', onChangeFunc);
+    }
+  };
+});

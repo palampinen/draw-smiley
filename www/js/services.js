@@ -84,6 +84,50 @@ angular.module('smileyApp.services', [])
 
 })
 
+.factory('Faceapp', function($http) {
+  var corsUrl = 'https://cors-anywhere.herokuapp.com/';
+  var faceappUrl = 'https://node-01.faceapp.io/api/v2.3/photos';
+  var endpoint = corsUrl + faceappUrl;
+
+  // Add three-way data binding
+  return {
+    post: function(formData, photo) {
+      return $http.post(endpoint, formData, {
+        withCredentials: false,
+        headers: {
+          'X-FaceApp-DeviceID': '6666666666666666',
+          'Content-Type': undefined
+        },
+        data: {
+          file: photo,
+        },
+        transformRequest: angular.identity,
+      })
+      .success(function(response) {
+        console.log('success', response);
+        return response;
+      })
+      .error(function(error, status, headers, config) {
+        console.log('error', error);
+      });
+    },
+    get: function(code, filter) {
+      var imageUrl = corsUrl + faceappUrl + '/' + code + '/filters/' + filter + '?cropped=0';
+
+      return $http.get(imageUrl, {
+        headers: {
+          'X-FaceApp-DeviceID': '6666666666666666',
+        },
+        responseType: 'blob'
+      })
+      .success(function(response) {
+        return response;
+      })
+    }
+  }
+})
+
+
 .factory('Helpers', function() {
   return {
     getTimeAgo: function(ago) {
