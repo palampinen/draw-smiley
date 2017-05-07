@@ -115,13 +115,27 @@ angular.module('smileyApp.services', [])
       }
 
       return moment(ago).format(agoFormat);
+    },
+    debounce: function(func, wait, immediate) {
+      var timeout;
+      return function() {
+        var context = this, args = arguments;
+        var later = function() {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+      };
+    },
     composeFileName: function(time, userName) {
       var formattedUserName = userName.replace(/ /g, '-');
       return 'smiley-' + formattedUserName + '-' + time + '.png'
     }
   }
 
-});
 })
 // background image directive
 .directive('backImg', function(){

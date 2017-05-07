@@ -101,6 +101,24 @@ angular.module('smileyApp.controllers')
       ? 'Today'
       : momentDate.format('ddd D.M.');
   }
+
+  $scope.getTotalRatingsForDate = function(date) {
+    var momentDate = moment(date);
+    var totalRatedPostsForDate = ($scope.items || [])
+    .filter(function(smiley) {
+      return smiley.rate && momentDate.isSame(moment(smiley.added), 'day')
+    });
+
+    if (totalRatedPostsForDate.length === 0) {
+      return '-';
+    }
+
+    var avg = (totalRatedPostsForDate || []).reduce(function(acc, smiley) {
+      return acc + (smiley.rate || 0);
+    }, 0) / totalRatedPostsForDate.length;
+
+    return avg.toFixed(1);
   }
+
 
 });

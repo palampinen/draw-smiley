@@ -7,12 +7,13 @@
     <div class="smiley-feed" ng-if="!loading">
       <div class="item item-complex smiley">
         <div class="item-content">
-        <div class="item item-avatar item-header">
-          <span class="round-img ion-android-contact"></span>
-          <h2>{{smiley.nick}}</h2>
-          <p class="time-ago">{{getTimeAgo(smiley.added)}}</p>
-          <span class="badge badge-royal" ng-if="smiley.added > lastChecked"> FRESH</span>
-        </div>
+          <div class="item item-avatar item-header">
+            <span class="round-img ion-android-contact"></span>
+            <h2>{{smiley.nick}}</h2>
+            <p class="time-ago">{{getTimeAgo(smiley.added)}}</p>
+            <!--<span class="badge badge-royal" ng-if="smiley.added > lastChecked"> FRESH</span>-->
+            <span class="rating" ng-if="smiley.rate"><span>{{smiley.rate}}</span>/5</span>
+          </div>
 
           <div class="item item-image" back-img="{{smiley.gif || smiley.img}}" ></div>
           <div class="item item-footer">
@@ -37,7 +38,7 @@
 
     <div ng-if="!loading && smileysFromUser.length > 1">
       <h2 class="title-separator">More smileys from {{smiley.nick}}</h2>
-      <div class="smiley-feed disable-user-behavior  smiley-feed--not-fixed compact">
+      <div class="smiley-feed disable-user-behavior smiley-feed--not-fixed compact">
         <div class="list">
           <div class="item item-complex smiley" ng-if="item.$id !== smiley.$id" ng-repeat="item in smileysFromUser | orderBy:'added':true track by item.$id" >
             <a class="item-content" ng-href="#/feed/{{item.$id}}">
@@ -45,7 +46,7 @@
                 <span class="round-img ion-android-contact"></span>
                 <h2>{{item.nick || '-'}}</h2>
                 <p class="time-ago">{{getTimeAgo(item.added)}}</p>
-                <span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>
+                <!--<span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>-->
               </div>
 
               <div class="item item-image" back-img="{{item.gif || item.img}}" ></div>

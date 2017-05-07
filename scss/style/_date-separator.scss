@@ -37,6 +37,11 @@
   }
 }
 
+.date-rating-avg {
+  float: right;
+  color: $royal;
+}
+
 @media screen and (max-width: 767px) {
   &.date-separator.compact {
     .date-separator__title {

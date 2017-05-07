@@ -35,30 +35,32 @@
         >
           <div class="date-separator__title" ng-if="index === 0 || !isSameDay(item.added, orderedItems[index - 1].added)">
             {{getDateLabel(item.added)}}
+            <span class="date-rating-avg">avg {{getTotalRatingsForDate(item.added)}}</span>
           </div>
           <div class="item-content">
-            <div>
-              <div class="item item-avatar item-header">
-                <span class="round-img ion-android-contact"></span>
-                <h2>{{item.nick || '-'}}</h2>
-                <p class="time-ago">{{getTimeAgo(item.added)}}</p>
-                <span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>
-                <span class="rating" ng-if="item.rate"><span>{{item.rate}}</span>/5</span>
-              </div>
+            <div class="item item-avatar item-header">
+              <span class="round-img ion-android-contact"></span>
+              <h2>{{item.nick || '-'}}</h2>
+              <p class="time-ago">{{getTimeAgo(item.added)}}</p>
+              <!--<span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>-->
+              <span class="rating" ng-if="item.rate"><span>{{item.rate}}</span>/5</span>
+            </div>
 
             <a class="item item-image" ng-href="#/feed/{{item.$id}}" back-img="{{item.gif || item.img}}" ></a>
 
+            <div class="item item-footer">
               <a
                 ng-class="{hasLikes: item.like, 'animation-active': animatingItems[item.$id]}"
-                class="item item-footer item-icon-left like-counter" href
-                ng-click="item.like = item.like + 1; items.$save(item)">
+                class="item-icon-left like-counter" href
+                ng-click="item.like = item.like + 1; items.$save(item)"
+              >
                 <span class="ion-android-favorite like-animation"></span>
                 <i class="icon ion-android-favorite-outline"></i>
                 <span class="text">{{item.like}}</span>
               </a>
             </div>
-          </div>
         </div>
+      </div>
       </div>
     </div>
 
@@ -66,7 +68,7 @@
 
   </ion-content>
 
-  <a ng-href="#/draw" ng-if="!loading" class="button button-calm icon button-round bottom-right ion-android-add" >
+  <a ng-href="#/draw" class="button button-calm icon button-round bottom-right ion-android-add" >
   </a>
 
 </ion-view>

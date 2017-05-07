@@ -1,7 +1,15 @@
 
 angular.module('smileyApp.controllers')
 
-.controller('DrawCtrl', function($scope, Smiley, $state, $ionicScrollDelegate, $timeout, $http, User) {
+.controller('DrawCtrl', function($scope, $state, Smiley, SmileyStorage, $ionicScrollDelegate, $timeout, Helpers, $http, User) {
+
+  var modes = {
+    GIF: 'GIF',
+    DRAW: 'DRAW',
+  };
+
+  $scope.modes = modes;
+  $scope.mode = modes.DRAW;
 
   $scope.$on("$ionicView.leave", function(){
     $scope.givenRating = null;
@@ -9,20 +17,6 @@ angular.module('smileyApp.controllers')
     clearCanvas()
   });
 
-  function debounce(func, wait, immediate) {
-    var timeout;
-    return function() {
-      var context = this, args = arguments;
-      var later = function() {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      var callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  };
   // Clear canvas by re-rendering it with toggling scope variable
   var clearCanvas = function() {
     $timeout(function() { $scope.clearingCanvas = true;
@@ -39,17 +33,17 @@ angular.module('smileyApp.controllers')
       $scope.touched = true;
       $timeout( function() {
         $('#sketch').sketch({ defaultColor: '#329E41'});
-      }, 10);
+      });
     }, 400);
   };
 
-  $scope.searchGIF = debounce(function(term) {
+  $scope.searchGIF = Helpers.debounce(function(term) {
     $http.get(`https://api.giphy.com/v1/gifs/search?q=${term}&api_key=dc6zaTOxFJmzC`).then(function (results) {
       $scope.GIFResults = results.data.data.map(function(item) {
         return item.images.downsized.url;
       });
     })
-  }, 500);
+  }, 600);
 
   $scope.GIFResults = [];
   $scope.searchGIF('cat');
@@ -67,7 +61,7 @@ angular.module('smileyApp.controllers')
   }
 
   $scope.setGIFMode = function() {
-    $scope.gif = true;
+    $scope.mode = modes.GIF;
   }
 
   $scope.setEraserMode = function() {
@@ -77,7 +71,7 @@ angular.module('smileyApp.controllers')
 
   $scope.setDrawMode = function() {
     $scope.eraser = false;
-    $scope.gif = false;
+    $scope.mode = modes.DRAW;
   }
 
 
