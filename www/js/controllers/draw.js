@@ -6,6 +6,7 @@ angular.module('smileyApp.controllers')
   $scope.$on("$ionicView.leave", function(){
     $scope.givenRating = null;
     $scope.touched = false;
+    clearCanvas()
   });
 
   function debounce(func, wait, immediate) {
@@ -22,6 +23,13 @@ angular.module('smileyApp.controllers')
       if (callNow) func.apply(context, args);
     };
   };
+  // Clear canvas by re-rendering it with toggling scope variable
+  var clearCanvas = function() {
+    $timeout(function() { $scope.clearingCanvas = true;
+      $timeout(function() { delete $scope.clearingCanvas; });
+    });
+  }
+
 
   $scope.loading = false;
 
