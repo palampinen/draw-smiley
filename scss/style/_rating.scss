@@ -1,25 +1,31 @@
 .rating {
   display: block;
   position: absolute;
-  right: 15px;
-  top: 15px;
-  z-index: 10;
+  right: 12px;
+  top: 22px;
+  z-index: 1;
+
   opacity: 0.9;
-  background: rgba($calm, 0.4);
-  width: 46px;
-  height: 46px;
+  background: rgba($calm, 0);
+  width: 44px;
+  height: 22px;
+
   text-align: center;
-  line-height: 46px;
-  letter-spacing: 2px;
-  border-radius: 50%;
+  letter-spacing: 1.5px;
   white-space: nowrap;
   font-weight: bold;
   color: #999;
+  color: rgba($royal, 0.5);
   span {
     color: $royal;
   }
 
   .compact & {
-    top: 5px;
+    font-size: 0.8em;
+    right: 10px;
+    top: 17px;
+    width: 36px;
+    height: 18px;
+    line-height: 18px;
   }
 }
