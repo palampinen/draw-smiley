@@ -41,20 +41,31 @@
     padding: 0;
     border: none;
     max-width: 500px;
+    height: 550px;
     margin: 20px 15px;
     background: transparent;
     transition: all 0.4s ease;
     overflow: visible;
 
+    .item-avatar {
+      min-height: 60px;
+    }
+
     .item-content {
       border-radius: 20px;
       background: $light;
       padding: 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      height: 100%;
+
     }
     .activated {
       transition: opacity 0.1s;
       opacity: 0.6;
-      background: $light !important;
+      background-color: $light !important;
     }
   }
 
@@ -104,12 +115,15 @@
 
   .time-ago {
     color: #aaa;
-    font-size: 0.8em;
+    font-size: 0.9em;
+    margin: 3px 0 0 0;
+    line-height: 1;
   }
 
   .badge {
     top: 1px;
     right: 0;
+    z-index: 2;
     padding: 3px 15px 3px;
   }
 
@@ -118,9 +132,11 @@
     font-size: 1.3em;
     margin-left: 5px;
     color: rgba($balanced, 0.8);
-    padding-left: 45px;
+    padding-left: 25px;
+    text-decoration: none;
     .icon {
       font-size: 1em;
+      margin-top: -2px;
     }
     .text {
     }
@@ -180,7 +196,9 @@
       }
       .time-ago {
         font-size: 0.6em;
-        margin: -5px 0 0;
+        line-height: 1;
+        padding: 0;
+        margin: 0;
         display: block;
         float: left
       }

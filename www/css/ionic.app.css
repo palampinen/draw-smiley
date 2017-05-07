@@ -9954,6 +9954,10 @@ a.button {
   .smiley-feed.date-separator.compact .date-separator__title {
     text-align: left; }
 
+.smiley-feed .date-rating-avg {
+  float: right;
+  color: #46289A; }
+
 @media screen and (max-width: 767px) {
   .smiley-feed.date-separator.compact .date-separator__title {
     padding-top: 20px; } }
@@ -9973,18 +9977,25 @@ a.button {
   padding: 0;
   border: none;
   max-width: 500px;
+  height: 550px;
   margin: 20px 15px;
   background: transparent;
   transition: all 0.4s ease;
   overflow: visible; }
+  .smiley-feed .smiley .item-avatar {
+    min-height: 60px; }
   .smiley-feed .smiley .item-content {
     border-radius: 20px;
     background: #fff;
-    padding: 0; }
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%; }
   .smiley-feed .smiley .activated {
     transition: opacity 0.1s;
     opacity: 0.6;
-    background: #fff !important; }
+    background-color: #fff !important; }
 
 .smiley-feed .item-header {
   border: none;
@@ -9992,7 +10003,11 @@ a.button {
 
 .smiley-feed .item-image {
   border: none;
-  background: inherit; }
+  background: inherit;
+  flex: 1;
+  text-align: center;
+  background-size: cover;
+  background-position: 50% 50%; }
   .smiley-feed .item-image img {
     animation: drop-in 0.35s ease;
     max-width: 100%; }
@@ -10025,11 +10040,14 @@ a.button {
 
 .smiley-feed .time-ago {
   color: #aaa;
-  font-size: 0.8em; }
+  font-size: 0.9em;
+  margin: 3px 0 0 0;
+  line-height: 1; }
 
 .smiley-feed .badge {
   top: 1px;
   right: 0;
+  z-index: 2;
   padding: 3px 15px 3px; }
 
 .smiley-feed .like-counter {
@@ -10037,9 +10055,11 @@ a.button {
   font-size: 1.3em;
   margin-left: 5px;
   color: rgba(50, 158, 65, 0.8);
-  padding-left: 45px; }
+  padding-left: 25px;
+  text-decoration: none; }
   .smiley-feed .like-counter .icon {
-    font-size: 1em; }
+    font-size: 1em;
+    margin-top: -2px; }
   .smiley-feed .like-counter .like-animation {
     display: none;
     font-size: 30px; }
@@ -10069,7 +10089,7 @@ a.button {
   width: 50px;
   text-align: center;
   top: 0px;
-  animation: drop-from-right 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  animation: drop-from-right 0.6s cubic-bezier(0.24, 0.81, 0.24, 1); }
 
 .smiley-feed.compact .item-avatar {
   padding: 12px 15px 8px;
@@ -10078,7 +10098,9 @@ a.button {
     float: none; }
   .smiley-feed.compact .item-avatar .time-ago {
     font-size: 0.6em;
-    margin: -5px 0 0;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
     display: block;
     float: left; }
   .smiley-feed.compact .item-avatar .round-img {
@@ -10095,7 +10117,7 @@ a.button {
   border-radius: 10px;
   padding: 2px 15px 2px 10px;
   min-width: 40px;
-  animation: drop-from-right 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  animation: drop-from-right 0.6s cubic-bezier(0.24, 0.81, 0.24, 1);
   text-align: left;
   display: none; }
   .smiley-feed.compact .item-footer.hasLikes {
@@ -10112,6 +10134,10 @@ a.button {
     .smiley-feed.compact .item-footer .icon:before {
       width: auto; }
 
+@media screen and (max-width: 768px) {
+  .smiley-feed:not(.compact) .smiley {
+    height: 60vh; } }
+
 @media screen and (min-width: 768px) {
   .smiley-feed .smiley {
     margin-left: auto;
@@ -10122,7 +10148,8 @@ a.button {
     flex-direction: column;
     margin: 0 0 1vw 1vw;
     width: calc(19vw - 4px);
-    height: 22vw;
+    height: 23vw;
+    height: calc(19vw + 50px);
     animation: fade-in 0.1s ease;
     animation: none;
     float: left; }
@@ -10139,29 +10166,31 @@ a.button {
   .smiley-feed.compact .smiley {
     width: 8vw;
     width: calc(8vw - 1px);
-    height: 11vw; } }
+    height: 10.5vw;
+    height: calc(8vw + 50px); } }
 
 .view--draw {
   background: #eee; }
   .view--draw .button-bar {
     z-index: 2;
     position: relative;
-    animation: drop-in 0.5s;
+    animation: drop-in 0.5s cubic-bezier(0.24, 0.81, 0.24, 1);
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 0px 1px rgba(0, 0, 0, 0.4); }
     .view--draw .button-bar > .button {
       border-radius: 0;
       border: none;
-      line-height: 60px; }
+      line-height: 50px; }
       .view--draw .button-bar > .button:before {
         position: relative;
-        margin-top: 5px; }
+        top: 0px; }
       .view--draw .button-bar > .button.active {
-        box-shadow: inset 0 -3px 0 #46289A; }
+        background: #FFF;
+        box-shadow: inset 0 -2px 0 #46289A; }
     .view--draw .button-bar.fixed-bottom {
       box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
       position: fixed;
       bottom: 0;
-      animation: drop-from-bottom 0.5s; }
+      animation: drop-from-bottom 0.5s cubic-bezier(0.24, 0.81, 0.24, 1); }
   .view--draw .scroll {
     min-height: calc(100vh - 112px); }
   .view--draw .draw-container, .view--draw .draw-area, .view--draw .gif-area {
@@ -10175,7 +10204,7 @@ a.button {
     top: 50px;
     bottom: 50px; }
   .view--draw .draw-area {
-    animation: fade-in-scale-out 0.8s;
+    animation: fade-in-scale-out 0.5s cubic-bezier(0.24, 0.81, 0.24, 1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10183,20 +10212,23 @@ a.button {
     z-index: 1; }
   .view--draw .gif-area {
     overflow: auto;
-    max-width: 600px;
     margin: auto;
-    padding: 0 1em; }
+    padding: 0;
+    max-width: 600px; }
   .view--draw .gif-area__search {
     width: 100%;
     height: 40px;
-    margin-top: 30px;
-    margin-bottom: 25px;
+    margin: 30px 1em 25px;
     padding: 0 0.5em;
     border-radius: 3px; }
   .view--draw .gif-area__image {
-    width: 100%; }
+    width: 100%;
+    display: block;
+    border: none;
+    padding: 0.5em 1em; }
   .view--draw .gif-area__image--active {
-    border: 4px solid #329E41; }
+    background: rgba(50, 158, 65, 0.3);
+    background: #CDECE4; }
   .view--draw .draw {
     background: #fff;
     border-radius: 10px;
@@ -10204,9 +10236,9 @@ a.button {
     margin: 0 auto;
     max-width: 90%;
     cursor: crosshair; }
-  .view--draw .draw__colors {
+  .view--draw .draw__tools {
     position: relative;
-    margin: 0px auto 5px;
+    margin: -10px auto 5px;
     text-align: center;
     z-index: 99; }
   .view--draw .draw__color {
@@ -10214,7 +10246,7 @@ a.button {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    margin: 0 10px;
+    margin: 0 8px;
     transition: all 0.2s; }
     .view--draw .draw__color.active {
       transform: scale(1.3); }
@@ -10228,6 +10260,44 @@ a.button {
       background: #46289A; }
     .view--draw .draw__color.orange {
       background: #FF821E; }
+  .view--draw .draw__action {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    line-height: 40px;
+    background: #999;
+    color: #FFF;
+    font-size: 20px;
+    transition: all 0.2s;
+    position: relative;
+    margin: 0 4px 15px; }
+    .view--draw .draw__action.active {
+      background: #444; }
+
+@keyframes fade-in {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+  .view--draw .loading-layer {
+    animation: fade-in 0.15s;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; }
+    .view--draw .loading-layer svg {
+      width: 40px;
+      height: 40px;
+      stroke: #fff;
+      fill: #fff; }
 
 @media screen and (min-width: 840px) {
   .draw {
@@ -10242,7 +10312,23 @@ a.button {
       margin-left: -400px; }
     .button-bar > .button {
       border-radius: 0;
-      border: none; } }
+      border: none; }
+  .view--draw .draw__tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    margin: -15px auto 15px; }
+    .view--draw .draw__tools > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+    .view--draw .draw__tools .draw__action {
+      margin-bottom: 0; }
+      .view--draw .draw__tools .draw__action.last {
+        margin-right: 25px; }
+  .view--draw .gif-area__image {
+    padding: 1em; } }
 
 .title-separator {
   color: #aaa;
@@ -10250,6 +10336,19 @@ a.button {
   font-weight: bold;
   text-align: center;
   margin-top: 45px !important; }
+
+.item-footer .action-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 18px;
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  line-height: 38px;
+  border-radius: 50%;
+  text-align: center;
+  background: #eee; }
 
 .start-layer {
   display: flex;
@@ -10364,24 +10463,28 @@ a.button {
 .rating {
   display: block;
   position: absolute;
-  right: 15px;
-  top: 15px;
-  z-index: 10;
+  right: 12px;
+  top: 22px;
+  z-index: 1;
   opacity: 0.9;
-  background: rgba(205, 236, 228, 0.4);
-  width: 46px;
-  height: 46px;
+  background: rgba(205, 236, 228, 0);
+  width: 44px;
+  height: 22px;
   text-align: center;
-  line-height: 46px;
-  letter-spacing: 2px;
-  border-radius: 50%;
+  letter-spacing: 1.5px;
   white-space: nowrap;
   font-weight: bold;
-  color: #999; }
+  color: #999;
+  color: rgba(70, 40, 154, 0.5); }
   .rating span {
     color: #46289A; }
   .compact .rating {
-    top: 5px; }
+    font-size: 0.8em;
+    right: 10px;
+    top: 17px;
+    width: 36px;
+    height: 18px;
+    line-height: 18px; }
 
 .kpis {
   padding: 15px 30px; }
