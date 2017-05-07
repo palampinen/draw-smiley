@@ -46,9 +46,7 @@
                 <span class="rating" ng-if="item.rate"><span>{{item.rate}}</span>/5</span>
               </div>
 
-              <a class="item item-image" ng-href="#/feed/{{item.$id}}">
-                <img src="{{item.gif || item.img}}" />
-              </a>
+            <a class="item item-image" ng-href="#/feed/{{item.$id}}" back-img="{{item.gif || item.img}}" ></a>
 
               <a
                 ng-class="{hasLikes: item.like, 'animation-active': animatingItems[item.$id]}"

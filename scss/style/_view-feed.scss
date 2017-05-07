@@ -66,6 +66,10 @@
   .item-image {
     border: none;
     background: inherit;
+    flex: 1;
+    text-align: center;
+    background-size: cover;
+    background-position: 50% 50%;
     img {
       animation: drop-in 0.35s ease;
       max-width: 100%;
@@ -224,6 +228,14 @@
 
 }
 
+@media screen and (max-width: 768px) {
+  .smiley-feed:not(.compact) {
+    .smiley{
+      height: 60vh;
+    }
+  }
+}
+
 @media screen and (min-width: 768px) {
 
   .smiley-feed {
@@ -245,7 +257,8 @@
         }
         margin: 0 0 1vw 1vw;
         width: calc(19vw - 4px); // ???
-        height: 22vw;
+        height: 23vw;
+        height: calc(19vw + 50px);
         animation: fade-in 0.1s ease;
         animation: none;
         float: left;
@@ -264,7 +277,8 @@
       .smiley {
         width: 8vw;
         width: calc(8vw - 1px); // ???
-        height: 11vw;
+        height: 10.5vw;
+        height: calc(8vw + 50px);
       }
     }
   }
