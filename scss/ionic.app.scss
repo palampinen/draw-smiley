@@ -1,13 +1,13 @@
 
 $light:                           #fff !default;
-$stable:                          #eee !default;
+$stable:                          #F9F9FC !default;
 $positive:                        #46289A !default;
 $calm:                            #CDECE4 !default;
-$balanced:                        #329E41 !default;
+$balanced:                        #40b24f !default;
 $energized:                       #FFF046 !default;
 $assertive:                       #FF5240 !default;
 $royal:                           #46289A !default;
-$dark:                            #444 !default;
+$dark:                            #504d5b !default;
 $lightgrey:                       #EEF3F5;
 $lightpurple:                     #BEC3E6;
 $warmgrey:                        #F2EEE6;
@@ -17,8 +17,8 @@ $button-calm-text:                $royal;
 $button-energized-text:           $dark;
 $button-border-width:             0px;
 
-$tabs-height: 50px;
-$bar-height:  50px;
+$tabs-height: 56px;
+$bar-height:  56px;
 $font-family-sans-serif: 'proxima-nova', '-apple-system', "Helvetica Neue", sans-serif;
 
 $smiley-animation: cubic-bezier(0.24, 0.81, 0.24, 1);

@@ -31,6 +31,13 @@
   to { transform: translate3d(0, 0, 0); opacity: 1 }
 }
 
+@keyframes radial-in {
+  from { transform: scale(0); opacity: 0; border-radius: 100%; }
+  to { transform: scale(2); opacity: 1; border-radius: 0%;}
+}
+
+
+
 @keyframes drop-from-bottom {
   from { transform: translate3d(0, 50%, 0); opacity: 0 }
   to { transform: translate3d(0, 0, 0); opacity: 1 }
@@ -48,6 +55,11 @@
 
 @keyframes fade-in-scale-out {
   from { opacity: 0.9; transform: scale(1.2); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-in-scale-in {
+  from { opacity: 0.9; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
 
@@ -79,7 +91,26 @@
 }
 
 
+@-webkit-keyframes fadeIn {
+  from { opacity:0; }
+  to {  opacity: 1; }
+}
 
+@keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity: 1; }
+}
+
+
+@-webkit-keyframes fadeOut {
+  from { opacity:1; }
+  to {  opacity: 0; }
+}
+
+@keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity: 0; }
+}
 
 
 
