@@ -54,14 +54,25 @@
       <canvas id="sketch" width="350" height="350" class="draw" ng-if="!clearingCanvas"></canvas>
     </div>
     <div class="gif-area" ng-if="touched && mode === modes.GIF">
-      <input class="gif-area__search" placeholder="Search GIFs.." type="text" ng-model="searchTerm" ng-change="searchGIF(searchTerm)" />
+      <form class="gif-area__search" ng-submit="submitGIFSearch()">
+        <input
+          id="gif-search"
+          class="gif-area__search"
+          placeholder="Search GIFs.."
+          type="text"
+          ng-model="searchTerm"
+          ng-change="searchGIF(searchTerm)"
+        />
+      </form>
       <div class="gif-area__gifs" ng-if="touched && mode === modes.GIF">
-        <img
-          class="gif-area__image"
+        <div
           ng-class="{'gif-area__image--active': $root.selectedGIF === url}"
           ng-click="$root.selectedGIF = url"
           ng-repeat="url in GIFResults"
-          ng-src="{{ url }}" />
+          class="gif-area__image"
+        >
+          <img ng-src="{{ url }}" />
+        </div>
       </div>
     </div>
 

@@ -14,7 +14,8 @@ angular.module('smileyApp.controllers')
   $scope.$on("$ionicView.leave", function(){
     $scope.givenRating = null;
     $scope.touched = false;
-    clearCanvas()
+    clearCanvas();
+    clearTools();
   });
 
   // Clear canvas by re-rendering it with toggling scope variable
@@ -22,6 +23,12 @@ angular.module('smileyApp.controllers')
     $timeout(function() { $scope.clearingCanvas = true;
       $timeout(function() { delete $scope.clearingCanvas; });
     });
+  }
+
+  // Set default tool settings
+  var clearTools = function() {
+    $scope.setColorActive($scope.colors[0].name);
+    $scope.setDrawMode();
   }
 
 
@@ -37,13 +44,18 @@ angular.module('smileyApp.controllers')
     }, 400);
   };
 
+  // Search GIfs
   $scope.searchGIF = Helpers.debounce(function(term) {
     $http.get(`https://api.giphy.com/v1/gifs/search?q=${term}&api_key=dc6zaTOxFJmzC`).then(function (results) {
       $scope.GIFResults = results.data.data.map(function(item) {
         return item.images.downsized.url;
       });
     })
-  }, 600);
+  }, 500);
+
+  $scope.submitGIFSearch = function() {
+    document.getElementById('gif-search').blur();
+  }
 
   $scope.GIFResults = [];
   $scope.searchGIF('cat');

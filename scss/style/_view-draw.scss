@@ -57,27 +57,57 @@
   .gif-area {
     overflow: auto;
     margin: auto;
-    padding: 0;
+    padding: 0 0.6em;
     max-width: 600px;
   }
 
   .gif-area__search {
     width: 100%;
     height: 40px;
-    margin: 30px 1em 25px;
-
-    padding: 0 0.5em;
-    border-radius: 3px;
+    margin: 0.5em auto 0.5em;
+    padding: 0 0;
+    input {
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      border-radius: 3px;
+      padding: 0 0.5em;
+      border: 1px solid rgba(0,0,0,.1);
+      &:focus {
+        border-color: $royal;
+      }
+    }
   }
   .gif-area__image {
-    width: 100%;
+    margin: 0;
     display: block;
     border: none;
-    padding: 0.5em 1em;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
   }
   .gif-area__image--active {
-    background: rgba($balanced, 0.3);
-    background: $calm;
+    // background: $calm;
+
+    &:after {
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 600px;
+      content: '';
+      background: rgba($balanced, 0.5);
+      position: absolute;
+
+      animation: radial-in 0.5s $smiley-animation;
+      transform-origin: 50% 50%;
+      animation-fill-mode: forwards;
+    }
+  }
+  .gif-area__image img {
+    width: 100%;
+    margin: 0;
+    display: block;
   }
 
   .draw {
@@ -205,8 +235,12 @@
       }
     }
 
+    .gif-area__search {
+      padding: 0;
+    }
+
     .gif-area__image {
-      padding: 1em;
+      padding: 0;
     }
   }
 }
