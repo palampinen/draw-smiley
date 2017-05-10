@@ -12,7 +12,7 @@
             <h2>{{smiley.nick}}</h2>
             <p class="time-ago">{{getTimeAgo(smiley.added)}}</p>
             <!--<span class="badge badge-royal" ng-if="smiley.added > lastChecked"> FRESH</span>-->
-            <span class="rating" ng-if="smiley.rate"><span>{{smiley.rate}}</span>/5</span>
+            <span class="rating" ng-if="smiley.rate"><span class="ion-android-star">{{smiley.rate}}</span></span>
           </div>
 
           <div class="item item-image" back-img="{{smiley.gif || smiley.img}}" ></div>
