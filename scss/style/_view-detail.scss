@@ -2,7 +2,8 @@
   color: #aaa;
   font-size: 18px;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
+  padding-left: 20px;
   margin-top: 45px !important;
 }
 
@@ -20,5 +21,22 @@
     border-radius: 50%;
     text-align: center;
     background: $stable;
+  }
+}
+
+
+.empty-state {
+  text-align: center;
+  color: #888;
+  padding: 50px 20px;
+  font-size: 1.2em;
+  line-height: 1.5;
+  .icon {
+    font-size: 100px;
+    line-height: 1;
+    margin-bottom: 20px;
+    color: $royal;
+    display: block;
+    margin-bottom: 0px;
   }
 }

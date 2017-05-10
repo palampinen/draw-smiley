@@ -5,11 +5,11 @@
 }
 
 &.date-separator {
-  padding-top: 40px !important;
+  padding-top: 65px !important;
 
   .lastOfDay {
     clear: right;
-    margin-bottom: 60px !important;
+    margin-bottom: 70px !important;
   }
 
   .firstOfDay {
@@ -18,16 +18,17 @@
 
   .date-separator__title {
     display: block;
-    animation: scale-in 0.5s;
+    animation: scale-in 0.4s $smiley-animation;
     clear: left;
     position: absolute;
-    top: -60px;
-    font-size: 18px;
+    top: -55px;
+    font-size: 16px;
     color: #aaa;
-    font-weight: bold;
-    padding: 20px 15px 15px;
+    font-weight: 600;
+    padding: 20px 0 15px;
     text-align: center;
     width: 100%;
+    text-transform: uppercase;
   }
 
   &.compact {
@@ -38,14 +39,24 @@
 }
 
 .date-rating-avg {
-  float: right;
+  position: absolute;
+  right: 0;
   color: $royal;
 }
 
 @media screen and (max-width: 767px) {
-  &.date-separator.compact {
-    .date-separator__title {
-      padding-top: 20px;
+  &.date-separator {
+    &.compact {
+      .date-separator__title {
+        padding: 20px 5px 15px;
+      }
     }
+
+    .date-separator__title {
+      font-size: 14px;
+    }
+  }
+  .date-rating-avg {
+    right: 5px;
   }
 }

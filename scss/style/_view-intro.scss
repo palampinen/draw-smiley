@@ -1,38 +1,60 @@
 .intro-page {
-  background: $royal;
+  background: $stable;
+  .scroll {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .container {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 }
 
 
 // Intro
-.intro-title { color: $calm; font-weight: normal; margin-bottom:30px; font-size: 2em; }
-#logo {position: relative;max-width: 40%; margin: 20px auto 25px;text-align: center}
+.intro-title { color: $royal; font-weight: 900; margin: 5px 0 10px; font-size: 2em; padding: 0; }
+#logo {position: relative; max-width: 30%; margin: -60px auto 0; text-align: center}
 #smiley {display: block; width: 80%; max-width: 470px; top:20px; position: relative;margin:0 auto 20px;}
-#pen {position:absolute; left:50%; top:10%; max-width:40%; animation:drawSmiley 6s linear infinite; -webkit-animation: drawSmiley 6s linear infinite;}
+#pen {position:absolute; display: none; left:50%; top:15%; max-width:25%; animation:drawSmiley 6s linear infinite; -webkit-animation: drawSmiley 6s linear infinite; animation: none;}
 
 .name-form {
-  max-width: 300px;
+  max-width: 333px;
   margin: 0 auto;
 }
 .account-form {
   position: relative;
-  top: 50px;
+  top: 0px;
+}
+
+h1.title--account {
+  margin-top: -30px;
 }
 
 .name-input {
   background: transparent;
   .item {
-    background: transparent;
+    background: #FFF;
     padding: 6px;
     input {
+      font-weight: 400;
       text-align: center;
-      color: $energized;
-      font-size: 1.5em;
+      color: $royal;
+      font-size: 24px;
+      line-height: 34px;
       padding-right: 0 !important;
     }
   }
 }
 
+.name-input input::-webkit-input-placeholder { color: rgba($royal, 0.5); line-height: 34px; }
+.name-input input::placeholder { color: rgba($royal, 0.5); line-height: 34px; }
+
 .button-save {
+  overflow: hidden;
   &:before {
     transform: scale(0);
   }
@@ -59,7 +81,7 @@
 
 @media screen and (min-width: 1024px) {
   .intro-title {
-    font-size: 4em;
+    font-size: 2.6em;
   }
 }
 

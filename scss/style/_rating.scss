@@ -5,7 +5,6 @@
   top: 22px;
   z-index: 1;
 
-  opacity: 0.9;
   background: rgba($calm, 0);
   width: 44px;
   height: 22px;
@@ -14,15 +13,15 @@
   letter-spacing: 1.5px;
   white-space: nowrap;
   font-weight: bold;
-  color: #999;
-  color: rgba($royal, 0.5);
-  span {
-    color: $royal;
+  color: rgba($royal, 0.8);
+  span::before {
+    margin-right: 1px;
+    color: #aaa;
   }
 
   .compact & {
-    font-size: 0.8em;
-    right: 10px;
+    font-size: 0.9em;
+    right: 6px;
     top: 17px;
     width: 36px;
     height: 18px;
