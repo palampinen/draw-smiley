@@ -1,19 +1,29 @@
 
 <ion-view title="Smileys" class="tabs-item-hide" hide-back-button="true">
-
+    <ion-nav-title>
+      <img class="header-smiley-icon" src="img/icon/arrow-smiley.png"> <span class="title-accent">Smileys</span>
+    </ion-nav-title>
     <ion-nav-buttons side="right">
+      <!--
+      <a href ng-click="toggleShowDateMode()" class="button button-icon icon ion-android-calendar" ng-class="{'line-through': showDates}"></a>
+      -->
       <a
         href
-        ng-click="toggleShowDateMode()"
-        class="button button-icon icon ion-android-calendar"
-        ng-class="{'line-through': showDates}"
-      ></a>
+        ng-click="toggleListMode()"
+        class="button button-text"
+        ng-class="{active: !listMode}"
+      >
+        GRID
+      </a>
       <a
         href
-        ng-click="toggleCompactMode()"
-        class="button button-icon icon"
-        ng-class="{'ion-android-checkbox-blank':compact, 'ion-android-list': !compact}"
-      ></a>
+        ng-click="toggleListMode()"
+        class="button button-text"
+        ng-class="{active: listMode}"
+      >
+        LIST
+      </a>
+
       <a ng-href="#/user/{{userName}}" class="button button-icon icon ion-android-person"></a>
     </ion-nav-buttons>
 
@@ -23,7 +33,7 @@
       <ion-spinner icon="android"></ion-spinner>
     </div>
 
-    <div class="smiley-feed disable-user-behavior" ng-class="{'compact':compact, 'date-separator': showDates}">
+    <div class="smiley-feed disable-user-behavior" ng-class="{'compact': !listMode, 'date-separator': showDates}">
       <div class="list">
         <div
           class="item item-complex smiley"
@@ -35,7 +45,7 @@
         >
           <div class="date-separator__title" ng-if="index === 0 || !isSameDay(item.added, orderedItems[index - 1].added)">
             {{getDateLabel(item.added)}}
-            <span class="date-rating-avg">avg {{getTotalRatingsForDate(item.added)}}</span>
+            <span class="date-rating-avg">Avg {{getTotalRatingsForDate(item.added)}}</span>
           </div>
           <div class="item-content">
             <div class="item item-avatar item-header">
@@ -43,7 +53,7 @@
               <h2>{{item.nick || '-'}}</h2>
               <p class="time-ago">{{getTimeAgo(item.added)}}</p>
               <!--<span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>-->
-              <span class="rating" ng-if="item.rate"><span>{{item.rate}}</span>/5</span>
+              <span class="rating" ng-if="item.rate"><span class="ion-android-star">{{item.rate}}</span></span>
             </div>
 
             <a class="item item-image" ng-href="#/feed/{{item.$id}}" back-img="{{item.gif || item.img}}" ></a>

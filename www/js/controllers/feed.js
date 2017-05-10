@@ -7,26 +7,26 @@ angular.module('smileyApp.controllers')
     })
   });
 
-  // Compact mode toggle
-  $scope.compact = User.getCompactMode();
-  $scope.toggleCompactMode = function() {
-    var currentCompactState = $scope.compact;
-    var nextCompactState = !currentCompactState
+  // List mode toggle
+  $scope.listMode = User.getListMode();
+  $scope.toggleListMode = function() {
+    var currentListModeState = $scope.listMode;
+    var nextListModeState = !currentListModeState
     $timeout(function() {
-      $scope.compact = nextCompactState;
-      User.setCompactMode(nextCompactState);
+      $scope.listMode = nextListModeState;
+      User.setListMode(nextListModeState);
     });
   };
 
-  $scope.showDates = User.getShowDatesMode();
-  $scope.toggleShowDateMode = function() {
-    var currentShowDateState = !!$scope.showDates;
-    var nextShowDateState = !currentShowDateState
-    $timeout(function() {
-      $scope.showDates = nextShowDateState;
-      User.setShowDatesMode(nextShowDateState);
-    });
-  }
+  $scope.showDates = true; // User.getShowDatesMode();
+  // $scope.toggleShowDateMode = function() {
+  //   var currentShowDateState = !!$scope.showDates;
+  //   var nextShowDateState = !currentShowDateState
+  //   $timeout(function() {
+  //     $scope.showDates = nextShowDateState;
+  //     User.setShowDatesMode(nextShowDateState);
+  //   });
+  // }
 
 
   // Load content

@@ -41,18 +41,26 @@
     padding: 0;
     border: none;
     max-width: 500px;
-    height: 550px;
+    height: 600px; // width + header + footer
     margin: 20px 15px;
     background: transparent;
-    transition: all 0.4s ease;
+    // transition: all 0.4s ease;
     overflow: visible;
+
+    .item {
+      margin: 0;
+    }
 
     .item-avatar {
       min-height: 60px;
+      position: relative;
+      z-index: 2;
     }
 
     .item-content {
-      border-radius: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 14px rgba($dark, .12);
+      border: 1px solid rgba(0,0,0,.07);
       background: $light;
       padding: 0;
 
@@ -60,18 +68,32 @@
       flex-direction: column;
       align-items: stretch;
       height: 100%;
-
     }
-    .activated {
+    .item-image.activated {
       transition: opacity 0.1s;
       opacity: 0.6;
-      background-color: $light !important;
+      // background-color: $light !important;
     }
   }
 
   .item-header {
     border: none;
     background: inherit;
+    h2 {
+      -webkit-font-smoothing: antialiased;
+      color: $dark;
+      font-weight: 500;
+      font-size: 16px;
+      margin-top: -4px;
+      margin-bottom: 4px;
+    }
+  }
+
+  .item-header--no-user {
+    padding-bottom: 12px;
+    .rating {
+      top: 10px;
+    }
   }
 
   .item-image {
@@ -81,8 +103,10 @@
     text-align: center;
     background-size: cover;
     background-position: 50% 50%;
+    animation: fade-in 0.35s $smiley-animation;
+    position: relative;
+    z-index: 1;
     img {
-      animation: drop-in 0.35s ease;
       max-width: 100%;
     }
   }
@@ -114,7 +138,7 @@
   }
 
   .time-ago {
-    color: #aaa;
+    color: #999;
     font-size: 0.9em;
     margin: 3px 0 0 0;
     line-height: 1;
@@ -136,9 +160,7 @@
     text-decoration: none;
     .icon {
       font-size: 1em;
-      margin-top: -2px;
-    }
-    .text {
+      margin-top: 0px;
     }
 
     .like-animation {
@@ -173,7 +195,7 @@
       height: 60vw;
 
       .item-image {
-        width: 100%;
+        width: auto;
       }
     }
 
@@ -189,13 +211,16 @@
     }
 
     .item-avatar {
-      padding: 12px 15px 8px;
+      padding: 12px 12px 8px;
+      &.item-header--no-user {
+        padding-bottom: 12px;
+      }
       min-height: 0;
       h2 {
         float: none;
       }
       .time-ago {
-        font-size: 0.6em;
+        font-size: 0.8em;
         line-height: 1;
         padding: 0;
         margin: 0;
@@ -210,36 +235,44 @@
       position: absolute;
       right: 0;
       bottom: 0;
-      font-size: 14px;
-      line-height: 1;
-      background: rgba($balanced, 0.7);
-      color: #FFF;
-      border-radius: 10px;
-      padding: 2px 15px 2px 10px;
-      min-width: 40px;
-      animation: drop-from-right 0.6s $smiley-animation;
-      text-align: left;
-      display: none;
+      padding: 0;
+      background: transparent;
+      .like-counter {
+        font-size: 14px;
+        z-index: 2;
+        line-height: 1;
+        background: rgba($balanced, 0.8);
+        color: #FFF;
 
-      &.hasLikes {
-        display: block;
-      }
-      .like-animation {
-        color: $balanced;
-      }
-      span {
-        top: auto;
-      }
-      .icon {
-        position: relative;
-        left: auto;
-        float: left;
-        margin-right: 5px;
-        &:before {
-          width: auto;
+        border-radius: 10px 0 0 10px;
+        padding: 4px 10px 2px 13px;
+        min-width: 40px;
+        animation: drop-from-right 0.6s $smiley-animation;
+
+        text-align: left;
+        display: none;
+
+        &.hasLikes {
+          display: block;
+        }
+
+        .like-animation {
+          color: $balanced;
+        }
+        span {
+          top: auto;
+        }
+        .icon {
+          position: relative;
+          left: auto;
+          float: left;
+          margin-right: 5px;
+          top: 0px;
+          &:before {
+            width: auto;
+          }
         }
       }
-      // display: none;
     }
 
   }
@@ -249,7 +282,7 @@
 @media screen and (max-width: 768px) {
   .smiley-feed:not(.compact) {
     .smiley{
-      height: 60vh;
+      height: 72vh;
     }
   }
 }
@@ -260,6 +293,13 @@
     .smiley {
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .item-content {
+      transition: box-shadow 0.3s;
+      &:hover {
+        box-shadow: 0 3px 16px rgba($dark, .2);
+      }
     }
     &.compact {
       .smiley {
@@ -281,7 +321,7 @@
         animation: none;
         float: left;
         .item-image {
-          width: 100%;
+          width: auto;
         }
       }
     }
@@ -293,10 +333,11 @@
   .smiley-feed {
     &.compact {
       .smiley {
-        width: 8vw;
-        width: calc(8vw - 1px); // ???
+        margin: 0 0 0.5vw 0.5vw;
+        width: 8.5vw;
+        width: calc(8.5vw - 0.2px);
         height: 10.5vw;
-        height: calc(8vw + 50px);
+        height: calc(8.5vw + 50px);
       }
     }
   }
