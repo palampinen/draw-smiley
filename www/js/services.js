@@ -82,11 +82,11 @@ angular.module('smileyApp.services', [])
         localStorage.removeItem(prefix+key);
       }
     },
-    getCompactMode: function() {
-      return this.getSetting('compact')
+    getListMode: function() {
+      return this.getSetting('listMode')
     },
-    setCompactMode: function(compact) {
-      this.setSetting('compact', compact)
+    setListMode: function(listMode) {
+      this.setSetting('listMode', listMode)
     },
     getShowDatesMode: function() {
       return this.getSetting('showDates')
