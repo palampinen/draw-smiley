@@ -1,54 +1,67 @@
 <ion-view title="{{title}}" class="tabs-item-hide">
+    <!--
     <ion-nav-buttons side="right">
       <a ng-href="#/account" ng-if="isMyPage" class="button button-icon icon ion-android-settings"></a>
     </ion-nav-buttons>
-
+    -->
 
 
   <ion-content class="smiley-feed-content" overflow-scroll="true">
+
     <div ng-if="loading" class="loading">
       <ion-spinner icon="android"></ion-spinner>
     </div>
 
-    <div ng-if="!loading && smileysFromUser.length > 0">
+    <div ng-if="!loading && !smileysFromUser.length" class="empty-state">
+      <span class="icon ion-android-contacts"></span>
+      Here will be all your smileys. <br />Start by adding your first smiley!
+    </div>
 
-      <div class="kpis">
-        <div class="kpi">
-          <div class="title">{{getTotalRatings()}}</div>
-          Avg. mood
-        </div>
+    <div class="user-header" ng-if="!loading">
+      <a ng-href="#/account" class="user-panel" ng-if="userName">
+        <span class="user-panel__avatar ion-android-person"></span>
+        <span class="user-panel__username">{{userName}}</span>
+        <span ng-if="isMyPage" class="ion-android-create user-panel__edit"></span>
+      </a>
 
-        <div class="kpi">
-          <div class="title">{{smileysFromUser.length}}</div>
-          Smileys
-        </div>
-        <div class="kpi">
-          <div class="title">{{getSmileysThisWeek()}}</div>
-          This week
-        </div>
-        <div class="kpi">
-          <div class="title">{{getTotalLikes()}}</div>
-          Likes
+      <div ng-if="!loading && smileysFromUser.length > 0">
+
+        <div class="kpis">
+          <div class="kpi">
+            <div class="title">{{getTotalRatings()}}</div>
+            Avg. mood
+          </div>
+
+          <div class="kpi">
+            <div class="title">{{smileysFromUser.length}}</div>
+            Smileys
+          </div>
+          <div class="kpi">
+            <div class="title">{{getSmileysThisWeek()}}</div>
+            This week
+          </div>
+          <div class="kpi">
+            <div class="title">{{getTotalLikes()}}</div>
+            Likes
+          </div>
         </div>
       </div>
+    </div>
 
 
-      <div class="smiley-feed disable-user-behavior smiley-feed--not-fixed compact">
-        <div class="list">
-          <div class="item item-complex smiley" ng-repeat="item in smileysFromUser | orderBy:'added':true track by item.$id" >
-            <a class="item-content" ng-href="#/feed/{{item.$id}}">
-              <div class="item item-avatar item-header">
-                <span class="round-img ion-android-contact"></span>
-                <h2 ng-if="!isMyPage">{{item.nick}}</h2>
-                <p class="time-ago">{{getTimeAgo(item.added)}}</p>
-                <span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>
-              </div>
+    <div class="smiley-feed disable-user-behavior smiley-feed--not-fixed compact">
+      <div class="list">
+        <div class="item item-complex smiley" ng-repeat="item in smileysFromUser | orderBy:'added':true track by item.$id" >
+          <a class="item-content" ng-href="#/feed/{{item.$id}}">
+            <div class="item item-avatar item-header item-header--no-user">
+              <span class="round-img ion-android-contact"></span>
+              <!--<h2 ng-if="!isMyPage">{{item.nick}}</h2>-->
+              <p class="time-ago">{{getTimeAgo(item.added)}}</p>
+              <span class="rating" ng-if="item.rate"><span class="ion-android-star">{{item.rate}}</span></span>
+            </div>
 
-              <div class="item item-image">
-                <img src="{{item.gif || item.img}}" />
-              </div>
-            </a>
-          </div>
+            <div class="item item-image" back-img="{{item.gif || item.img}}"></div>
+          </a>
         </div>
       </div>
     </div>

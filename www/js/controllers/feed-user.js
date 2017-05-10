@@ -11,6 +11,7 @@ angular.module('smileyApp.controllers')
     var isMyPage = User.get() === userName;
 
     $scope.isMyPage = isMyPage;
+    $scope.userName = userName;
     $scope.title = isMyPage ? 'My smileys' : 'Smileys from '+ userName;
   });
 
