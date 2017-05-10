@@ -30,6 +30,7 @@ angular.module('smileyApp',
 
   $ionicConfigProvider.tabs.position('bottom');
   // $ionicConfigProvider.views.transition('android');
+  // $ionicConfigProvider.views.transition('none');
   $ionicConfigProvider.navBar.alignTitle('left');
   $ionicConfigProvider.spinner.icon('android');
   $ionicConfigProvider.backButton.previousTitleText(false);
