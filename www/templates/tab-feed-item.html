@@ -49,7 +49,10 @@
                 <!--<span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>-->
               </div>
 
-              <div class="item item-image" back-img="{{item.gif || item.img}}" ></div>
+              <div
+                class="item item-image"
+                ng-style="{'background-image':'url(' + (item.gif || item.img) + ')'}"
+              ></div>
             </a>
           </div>
         </div>

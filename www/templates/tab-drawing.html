@@ -70,8 +70,9 @@
           ng-click="$root.selectedGIF = url"
           ng-repeat="url in GIFResults"
           class="gif-area__image"
+          ng-style="{'background-image':'url(' + url + ')'}"
         >
-          <img ng-src="{{ url }}" />
+          <!-- <img ng-src="{{ url }}" /> -->
         </div>
       </div>
     </div>

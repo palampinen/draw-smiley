@@ -63,7 +63,10 @@
               <span class="rating" ng-if="item.rate"><span class="ion-android-star">{{item.rate}}</span></span>
             </div>
 
-            <div class="item item-image" back-img="{{item.gif || item.img}}"></div>
+            <div
+              class="item item-image"
+              ng-style="{'background-image':'url(' + (item.gif || item.img) + ')'}"
+            ></div>
           </a>
         </div>
       </div>
