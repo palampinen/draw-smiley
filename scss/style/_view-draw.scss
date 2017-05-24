@@ -67,7 +67,10 @@
     margin: 0.5em auto 0.5em;
     padding: 0 0;
     input {
-      -webkit-box-shadow: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
       box-shadow: none;
       border-radius: 3px;
       padding: 0 0.5em;
@@ -77,14 +80,22 @@
       }
     }
   }
+  .gif-area__gifs {
+    margin: 0 -1%;
+  }
   .gif-area__image {
     margin: 0;
-    display: block;
+    display: inline-block;
     border: none;
     padding: 0;
-    margin: 0;
     position: relative;
     overflow: hidden;
+    height: 200px;
+    width: 48%;
+    margin: 0 1%;
+
+    background-size: cover;
+    background-position: 50% 50%;
   }
   .gif-area__image--active {
     // background: $calm;
@@ -241,6 +252,7 @@
 
     .gif-area__image {
       padding: 0;
+      height: 275px;
     }
   }
 }

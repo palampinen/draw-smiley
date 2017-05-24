@@ -9840,28 +9840,18 @@ a.button {
 
 .intro-page {
   background: #F9F9FC; }
-  .intro-page .scroll {
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column; }
-  .intro-page .container {
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column; }
 
 .intro-title {
   color: #46289A;
   font-weight: 900;
-  margin: 5px 0 10px;
+  margin: 5px 0 30px;
   font-size: 2em;
   padding: 0; }
 
 #logo {
   position: relative;
   max-width: 30%;
-  margin: -60px auto 0;
+  margin: 0px auto 0;
   text-align: center; }
 
 #smiley {
@@ -9891,7 +9881,7 @@ a.button {
   top: 0px; }
 
 h1.title--account {
-  margin-top: -30px; }
+  margin-top: 30px; }
 
 .name-input {
   background: transparent; }
@@ -9899,6 +9889,7 @@ h1.title--account {
     background: #FFF;
     padding: 6px; }
     .name-input .item input {
+      padding: 6px;
       font-weight: 400;
       text-align: center;
       color: #46289A;
@@ -9907,12 +9898,10 @@ h1.title--account {
       padding-right: 0 !important; }
 
 .name-input input::-webkit-input-placeholder {
-  color: rgba(70, 40, 154, 0.5);
-  line-height: 34px; }
+  color: rgba(70, 40, 154, 0.5); }
 
 .name-input input::placeholder {
-  color: rgba(70, 40, 154, 0.5);
-  line-height: 34px; }
+  color: rgba(70, 40, 154, 0.5); }
 
 .button-save {
   overflow: hidden; }
@@ -9934,7 +9923,21 @@ h1.title--account {
   animation: scale-in 0.4s cubic-bezier(0.24, 0.05, 0.61, 1.67);
   animation-fill-mode: forwards; }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
+  .intro-page .scroll {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; }
+  .intro-page .container {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column; }
+  #logo {
+    margin: -60px auto 0; }
+  h1.title--account {
+    margin-top: -30px; }
   .intro-title {
     font-size: 2.6em; } }
 
@@ -9964,7 +9967,7 @@ h1.title--account {
   padding-top: 65px !important; }
   .smiley-feed.date-separator .lastOfDay {
     clear: right;
-    margin-bottom: 70px !important; }
+    margin-bottom: 150px !important; }
   .smiley-feed.date-separator .firstOfDay {
     clear: left; }
   .smiley-feed.date-separator .date-separator__title {
@@ -9973,7 +9976,7 @@ h1.title--account {
     clear: left;
     position: absolute;
     top: -55px;
-    font-size: 16px;
+    font-size: 14px;
     color: #aaa;
     font-weight: 600;
     padding: 20px 0 15px;
@@ -10225,7 +10228,7 @@ h1.title--account {
     .smiley-feed.compact .smiley .item-image {
       width: auto; } }
 
-@media screen and (min-width: 1919px) {
+@media screen and (min-width: 1660px) {
   .smiley-feed.compact .smiley {
     margin: 0 0 0.5vw 0.5vw;
     width: 8.5vw;
@@ -10285,21 +10288,29 @@ h1.title--account {
     margin: 0.5em auto 0.5em;
     padding: 0 0; }
     .view--draw .gif-area__search input {
-      -webkit-box-shadow: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
       box-shadow: none;
       border-radius: 3px;
       padding: 0 0.5em;
       border: 1px solid rgba(0, 0, 0, 0.1); }
       .view--draw .gif-area__search input:focus {
         border-color: #46289A; }
+  .view--draw .gif-area__gifs {
+    margin: 0 -1%; }
   .view--draw .gif-area__image {
     margin: 0;
-    display: block;
+    display: inline-block;
     border: none;
     padding: 0;
-    margin: 0;
     position: relative;
-    overflow: hidden; }
+    overflow: hidden;
+    height: 200px;
+    width: 48%;
+    margin: 0 1%;
+    background-size: cover;
+    background-position: 50% 50%; }
   .view--draw .gif-area__image--active:after {
     display: block;
     top: 0;
@@ -10417,7 +10428,8 @@ h1.title--account {
   .view--draw .gif-area__search {
     padding: 0; }
   .view--draw .gif-area__image {
-    padding: 0; } }
+    padding: 0;
+    height: 275px; } }
 
 .title-separator {
   color: #aaa;
@@ -10430,7 +10442,7 @@ h1.title--account {
 .item-footer .action-button {
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  bottom: 7px;
   font-size: 18px;
   display: inline-block;
   width: 38px;
@@ -10635,7 +10647,8 @@ h1.title--account {
     line-height: 18px; }
 
 .kpis {
-  padding: 15px 15px; }
+  padding: 15px 15px;
+  float: left; }
   .kpis .kpi {
     padding: 0 25px;
     display: inline-block;
@@ -10646,9 +10659,10 @@ h1.title--account {
       font-weight: bold;
       margin-bottom: 3px; }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1024px) {
   .kpis {
-    padding: 20px 10px; }
+    padding: 20px 10px;
+    float: none; }
     .kpis .kpi {
       padding: 0 15px 0 0;
       font-size: 0.8em; }
@@ -10659,6 +10673,10 @@ h1.title--account {
 .user-header {
   min-height: 100px;
   padding: 15px 30px; }
+  .user-header:after {
+    content: '';
+    clear: both;
+    display: table; }
 
 .user-panel {
   padding: 20px 0px;
@@ -10696,7 +10714,7 @@ h1.title--account {
   .user-panel {
     float: left;
     padding: 3px 40px 3px 15px;
-    margin: 7px 20px 7px 0;
+    margin: 7px 0px 7px 0;
     border-right: 1px solid rgba(0, 0, 0, 0.1); } }
 
 .button {

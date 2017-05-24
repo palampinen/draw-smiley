@@ -1,5 +1,6 @@
 .kpis {
   padding: 15px 15px;
+  float: left;
   .kpi {
     padding: 0 25px;
     display: inline-block;
@@ -14,9 +15,10 @@
 }
 
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1024px) {
   .kpis {
     padding: 20px 10px;
+    float: none;
     .kpi {
       padding: 0 15px 0 0;
       font-size: 0.8em;

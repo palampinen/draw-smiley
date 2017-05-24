@@ -2,6 +2,12 @@
 .user-header {
   min-height: 100px;
   padding: 15px 30px;
+
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
 }
 
 .user-panel {
@@ -47,7 +53,7 @@
   .user-panel {
     float: left;
     padding: 3px 40px 3px 15px;
-    margin: 7px 20px 7px 0;
+    margin: 7px 0px 7px 0;
     border-right: 1px solid rgba(0,0,0, .1);
   }
 }

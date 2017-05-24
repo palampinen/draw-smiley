@@ -1,23 +1,11 @@
 .intro-page {
   background: $stable;
-  .scroll {
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-  .container {
-    min-height: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
 }
 
 
 // Intro
-.intro-title { color: $royal; font-weight: 900; margin: 5px 0 10px; font-size: 2em; padding: 0; }
-#logo {position: relative; max-width: 30%; margin: -60px auto 0; text-align: center}
+.intro-title { color: $royal; font-weight: 900; margin: 5px 0 30px; font-size: 2em; padding: 0; }
+#logo {position: relative; max-width: 30%; margin: 0px auto 0; text-align: center}
 #smiley {display: block; width: 80%; max-width: 470px; top:20px; position: relative;margin:0 auto 20px;}
 #pen {position:absolute; display: none; left:50%; top:15%; max-width:25%; animation:drawSmiley 6s linear infinite; -webkit-animation: drawSmiley 6s linear infinite; animation: none;}
 
@@ -31,7 +19,7 @@
 }
 
 h1.title--account {
-  margin-top: -30px;
+  margin-top: 30px;
 }
 
 .name-input {
@@ -40,6 +28,7 @@ h1.title--account {
     background: #FFF;
     padding: 6px;
     input {
+      padding: 6px;
       font-weight: 400;
       text-align: center;
       color: $royal;
@@ -50,8 +39,8 @@ h1.title--account {
   }
 }
 
-.name-input input::-webkit-input-placeholder { color: rgba($royal, 0.5); line-height: 34px; }
-.name-input input::placeholder { color: rgba($royal, 0.5); line-height: 34px; }
+.name-input input::-webkit-input-placeholder { color: rgba($royal, 0.5); }
+.name-input input::placeholder { color: rgba($royal, 0.5); }
 
 .button-save {
   overflow: hidden;
@@ -79,7 +68,30 @@ h1.title--account {
 }
 
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
+  .intro-page {
+    .scroll {
+      min-height: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .container {
+      min-height: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  #logo {
+    margin: -60px auto 0;
+  }
+
+  h1.title--account {
+    margin-top: -30px;
+  }
   .intro-title {
     font-size: 2.6em;
   }
