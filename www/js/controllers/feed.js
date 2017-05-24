@@ -88,25 +88,48 @@ angular.module('smileyApp.controllers')
     }
   }
 
-  // time calc
-  $scope.isSameDay = function(a, b) {
-    // console.log(moment(a).toISOString() + ' - ' + moment(b).toISOString(), moment(a).isSame(moment(b), 'day'));
-    return a && b && moment(a).isSame(moment(b), 'day');
+  // Period (day, week) based content splitting
+  var periods = {
+    WEEK: 'week',
+    DAY: 'day'
+  };
+
+  var chosenPeriod = periods.WEEK;
+  var startDate = moment().startOf('week');
+  var prevStartDate = moment().subtract(1, 'week').startOf('week');
+
+  var getPeriodFormats = function(period) {
+    switch(period) {
+      case periods.WEEK:
+        return { same: 'This Week', prev: 'Last Week', dateString: 'Week ', dateFormat: 'w' };
+
+      case periods.DAY:
+        return { same: 'Today', prev: 'Yesteday', dateString: '', dateFormat: 'ddd D.M.' }
+    }
   }
 
-  var today = moment();
-  $scope.getDateLabel = function(date) {
+  $scope.isInSamePeriod = function(a, b) {
+    return a && b && moment(a).isSame(moment(b), chosenPeriod);
+  }
+
+  $scope.getPeriodLabel = function(date) {
     var momentDate = moment(date);
-    return momentDate.isSame(today, 'day')
-      ? 'Today'
-      : momentDate.format('ddd D.M.');
+    var format = getPeriodFormats(chosenPeriod);
+
+    if (momentDate.isSame(startDate, chosenPeriod)){
+      return format.same;
+    }
+    if (momentDate.isSame(prevStartDate, chosenPeriod)){
+      return format.prev;
+    }
+    return format.dateString + momentDate.format(format.dateFormat);
   }
 
   $scope.getTotalRatingsForDate = function(date) {
     var momentDate = moment(date);
     var totalRatedPostsForDate = ($scope.items || [])
     .filter(function(smiley) {
-      return smiley.rate && momentDate.isSame(moment(smiley.added), 'day')
+      return smiley.rate && momentDate.isSame(moment(smiley.added), chosenPeriod)
     });
 
     if (totalRatedPostsForDate.length === 0) {

@@ -33,18 +33,18 @@
       <ion-spinner icon="android"></ion-spinner>
     </div>
 
-    <div class="smiley-feed disable-user-behavior" ng-class="{'compact': !listMode, 'date-separator': showDates}">
+    <div class="smiley-feed" ng-class="{'compact': !listMode, 'date-separator': showDates}">
       <div class="list">
         <div
           class="item item-complex smiley"
           ng-repeat="(index, item) in orderedItems = (items | orderBy:'added':true) track by item.$id"
           ng-class="{
-            lastOfDay: !isSameDay(item.added, orderedItems[index + 1].added),
-            firstOfDay: index === 0 || !isSameDay(item.added, orderedItems[index - 1].added)
+            lastOfDay: !isInSamePeriod(item.added, orderedItems[index + 1].added),
+            firstOfDay: index === 0 || !isInSamePeriod(item.added, orderedItems[index - 1].added)
           }"
         >
-          <div class="date-separator__title" ng-if="index === 0 || !isSameDay(item.added, orderedItems[index - 1].added)">
-            {{getDateLabel(item.added)}}
+          <div class="date-separator__title" ng-if="index === 0 || !isInSamePeriod(item.added, orderedItems[index - 1].added)">
+            {{getPeriodLabel(item.added)}}
             <span class="date-rating-avg">Avg {{getTotalRatingsForDate(item.added)}}</span>
           </div>
           <div class="item-content">
@@ -56,7 +56,12 @@
               <span class="rating" ng-if="item.rate"><span class="ion-android-star">{{item.rate}}</span></span>
             </div>
 
-            <a class="item item-image" ng-href="#/feed/{{item.$id}}" back-img="{{item.gif || item.img}}" ></a>
+            <!--  back-img="{{item.gif || item.img}}"  -->
+            <a
+              class="item item-image"
+              ng-href="#/feed/{{item.$id}}"
+              ng-style="{'background-image':'url(' + (item.gif || item.img) + ')'}"
+            ></a>
 
             <div class="item item-footer">
               <a
