@@ -46,7 +46,7 @@ angular.module('smileyApp.controllers')
 
   // Search GIfs
   $scope.searchGIF = Helpers.debounce(function(term) {
-    $http.get(`https://api.giphy.com/v1/gifs/search?q=${term}&api_key=dc6zaTOxFJmzC`).then(function (results) {
+    $http.get(`https://api.giphy.com/v1/gifs/search?q=${term}&limit=40&api_key=dc6zaTOxFJmzC`).then(function (results) {
       $scope.GIFResults = results.data.data.map(function(item) {
         return item.images.downsized.url;
       });
