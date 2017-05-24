@@ -1,6 +1,6 @@
 angular.module('smileyApp.controllers')
 
-.controller('FeedItemCtrl', function($scope, $stateParams, $ionicPopup, $timeout, $state, SmileyService, Helpers, User) {
+.controller('FeedItemCtrl', function($scope, $stateParams, $ionicHistory, $ionicPopup, $timeout, $state, SmileyService, Helpers, User) {
 
   // Single Smiley mode
   $scope.loading = true;
@@ -46,7 +46,8 @@ angular.module('smileyApp.controllers')
     $scope.loading = true;
     SmileyService.remove(item).then(function() {
       $timeout(function() {
-        $state.go('tab.feed')
+        // $state.go('tab.feed')
+        $ionicHistory.goBack();
         $scope.loading = false;
       }, 300)
     });
