@@ -44,6 +44,26 @@ angular.module('smileyApp.services', [])
 
 })
 
+.factory('Post', function(Smiley, SmileyStorage, Helpers) {
+
+  return {
+    savePostImg: function(imageData, postData, cb) {
+      SmileyStorage.uploadDataUrl({
+        name: Helpers.composeFileName(postData.added, postData.nick, 'photo'),
+        data: imageData
+      })
+      .then(function(snapshot) {
+        // Save Smiley to Firebase with Storage Image URL
+        imageData = { img: snapshot.downloadURL };
+        postData = Object.assign(postData, imageData);
+
+        Smiley.$add(postData).then(cb);
+      });
+    }
+  };
+
+})
+
 .factory('User', function() {
   var prefix = 'smileyApp-'
   return {
@@ -130,9 +150,11 @@ angular.module('smileyApp.services', [])
         if (callNow) func.apply(context, args);
       };
     },
-    composeFileName: function(time, userName) {
+    composeFileName: function(time, userName, prefix) {
+      var imagePrefix = prefix || 'smiley';
       var formattedUserName = userName.replace(/ /g, '-');
-      return 'smiley-' + formattedUserName + '-' + time + '.png'
+
+      return imagePrefix + '-' + formattedUserName + '-' + time + '.png'
     }
   }
 

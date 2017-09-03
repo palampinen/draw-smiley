@@ -10248,11 +10248,28 @@ h1.title--account {
       border: none;
       line-height: 50px; }
       .view--draw .button-bar > .button:before {
-        position: relative;
-        top: 0px; }
+        position: relative; }
+      .view--draw .button-bar > .button.icon {
+        font-size: 12px; }
+        .view--draw .button-bar > .button.icon span {
+          display: none; }
+      .view--draw .button-bar > .button .icon-text {
+        font-size: 11px;
+        background: #444;
+        color: #FFF;
+        padding: 2px 3px;
+        border-radius: 3px;
+        text-transform: uppercase; }
       .view--draw .button-bar > .button.active {
-        background: #FFF;
-        box-shadow: inset 0 -2px 0 #46289A; }
+        background: #FFF; }
+        .view--draw .button-bar > .button.active:after {
+          top: auto;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: #46289A;
+          animation: scaleX-in 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .view--draw .button-bar.fixed-bottom {
       box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
       position: fixed;
@@ -10260,14 +10277,14 @@ h1.title--account {
       animation: drop-from-bottom 0.5s cubic-bezier(0.24, 0.81, 0.24, 1); }
   .view--draw .scroll {
     min-height: calc(100vh - 112px); }
-  .view--draw .draw-container, .view--draw .draw-area, .view--draw .gif-area {
+  .view--draw .draw-container, .view--draw .draw-area, .view--draw .gif-area, .view--draw .photo-area {
     z-index: 1;
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0; }
-  .view--draw .draw-area, .view--draw .gif-area {
+  .view--draw .draw-area, .view--draw .gif-area, .view--draw .photo-area {
     top: 56px;
     bottom: 56px; }
   .view--draw .draw-area {
@@ -10402,15 +10419,16 @@ h1.title--account {
     transition: box-shadow 0.3s; }
     .draw:hover {
       box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); }
-  .button-bar {
+  .view--draw .button-bar {
     max-width: 800px;
     margin: 0 auto; }
-    .button-bar.fixed-bottom {
+    .view--draw .button-bar.fixed-bottom {
       left: 50%;
       margin-left: -400px; }
-    .button-bar > .button {
+    .view--draw .button-bar > .button {
       border-radius: 0;
-      border: none; }
+      border: none;
+      font-size: 16px; }
   .view--draw .draw__tools {
     display: flex;
     justify-content: space-between;
@@ -10476,11 +10494,11 @@ h1.title--account {
   height: 100%;
   position: absolute;
   background: #46289a;
-  color: #FFF;
+  color: #CDECE4;
   padding-bottom: 30px;
   text-align: center;
   font-size: 2em;
-  font-size: 5vmin;
+  font-size: 6vmin;
   line-height: 1.3;
   z-index: 101;
   animation: fade-in 0.2s; }
@@ -10493,8 +10511,11 @@ h1.title--account {
     color: #fff;
     display: block;
     margin: 30px 0 10px; }
-  .start-layer .start-layer-content {
+  .start-layer .start-layer__content {
     animation: scale-in 0.5s; }
+  .start-layer .start-layer__title {
+    display: block;
+    margin-bottom: 4vmin; }
   .start-layer .icon {
     font-size: 5em;
     line-height: 1;
@@ -10540,6 +10561,52 @@ h1.title--account {
     font-size: 40px;
     margin: 20px; } }
 
+.photo-area {
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; }
+  .photo-area .preview {
+    max-height: 350px;
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+    border: none;
+    outline: none; }
+  .photo-area .camera-button {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    background: #FFF;
+    text-align: center;
+    line-height: 100px;
+    border-radius: 5px;
+    color: #977edd; }
+  .photo-area .camera-button-redo {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    background: #FFF;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    top: 20px;
+    right: 15px;
+    color: #977edd; }
+
+@media screen and (min-width: 840px) {
+  .photo-area .camera-button {
+    width: 300px;
+    height: 300px;
+    font-size: 100px;
+    line-height: 300px;
+    transition: all 0.1s ease; }
+    .photo-area .camera-button:hover {
+      color: #8769d8; } }
+
 .bar-header {
   border: 0px !important;
   border-bottom-color: transparent !important;
@@ -10556,7 +10623,9 @@ h1.title--account {
   .bar-header .header-smiley-icon {
     margin: 10px 13px 0 0;
     float: left;
-    width: 34px; }
+    width: 34px;
+    animation: rotate-in 0.35s ease-out;
+    transform-origin: 56% 50%; }
   .bar-header .title-accent {
     display: none; }
   .bar-header .back-button .icon {
@@ -10899,6 +10968,14 @@ h1.title--account {
     opacity: 1;
     border-radius: 0%; } }
 
+@keyframes rotate-in {
+  from {
+    transform: rotate(45deg);
+    opacity: 0; }
+  to {
+    transform: rotate(0);
+    opacity: 1; } }
+
 @keyframes drop-from-bottom {
   from {
     transform: translate3d(0, 50%, 0);
@@ -10942,6 +11019,12 @@ h1.title--account {
     transform: scale(0); }
   to {
     transform: scale(1); } }
+
+@keyframes scaleX-in {
+  from {
+    transform: scaleX(0); }
+  to {
+    transform: scaleX(1); } }
 
 @keyframes scale-in-while-rotated {
   from {

@@ -3,14 +3,28 @@
   <ion-content class="view--draw" overflow-scroll="true">
 
   <div class="button-bar" ng-if="touched">
-    <a class="button button-light positive icon-left ion-android-happy" ng-class="{active: mode === modes.DRAW}" ng-click="setDrawMode()" href>Smiley</a>
-    <a class="button button-light energized icon-left ion-ios-videocam" ng-class="{active: mode === modes.GIF}" ng-click="setGIFMode()" href>GIF</a>
+    <a
+      class="button button-light positive icon ion-happy"
+      ng-class="{active: mode === modes.DRAW}"
+      ng-click="setDrawMode()"
+      href><span>Smiley</span></a>
+    <a
+      class="button button-light energized icon"
+      ng-class="{active: mode === modes.GIF}"
+      ng-click="setGIFMode()"
+      href><i class="icon-text">gif</i></a>
+    <a
+      class="button button-light energized icon ion-android-camera"
+      ng-class="{active: mode === modes.PHOTO}"
+      ng-click="setPhotoMode()"
+      href><span>Photo</span></a>
   </div>
 
   <div class="draw-container" ng-if="!loading">
     <div class="start-layer" ng-if="!touched">
-      <div class="start-layer-content">
-        <i class="icon">?</i><br />How was your week?<br /><span class="subtitle">Rate</span>
+      <div class="start-layer__content">
+        <span class="start-layer__title">How was your week?</span>
+
         <a href class="rate-btn" ng-class="{rated: rating===givenRating}" ng-repeat="rating in [1,2,3,4,5]" ng-click="rateWeek(rating)">
           <span class="content">{{rating}}</span>
         </a>
@@ -18,6 +32,8 @@
         <a href="#/tab/feed/" class="cancel-link">Cancel</a>
       </div>
     </div>
+
+    <!-- # DRAW -->
     <div class="draw-area" ng-show="touched && mode === modes.DRAW">
       <div class="draw__tools">
         <div>
@@ -53,29 +69,18 @@
 
       <canvas id="sketch" width="350" height="350" class="draw" ng-if="!clearingCanvas"></canvas>
     </div>
-    <div class="gif-area" ng-if="touched && mode === modes.GIF">
-      <form class="gif-area__search" ng-submit="submitGIFSearch()">
-        <input
-          id="gif-search"
-          class="gif-area__search"
-          placeholder="Search GIFs.."
-          type="text"
-          ng-model="searchTerm"
-          ng-change="searchGIF(searchTerm)"
-        />
-      </form>
-      <div class="gif-area__gifs" ng-if="touched && mode === modes.GIF">
-        <div
-          ng-class="{'gif-area__image--active': $root.selectedGIF === url}"
-          ng-click="$root.selectedGIF = url"
-          ng-repeat="url in GIFResults"
-          class="gif-area__image"
-          ng-style="{'background-image':'url(' + url + ')'}"
-        >
-          <!-- <img ng-src="{{ url }}" /> -->
-        </div>
-      </div>
-    </div>
+
+    <!-- # GIF -->
+    <div
+      ng-if="touched && mode === modes.GIF"
+      ng-include="'templates/partial-gif.html'"
+    ></div>
+
+    <!-- # PHOTO -->
+    <div
+      ng-if="touched && mode === modes.PHOTO"
+      ng-include="'templates/partial-photo.html'"
+    ></div>
 
   </div>
 

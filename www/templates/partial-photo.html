@@ -1,0 +1,34 @@
+<div id="photo-view" class="photo-area">
+
+  <a
+    ng-show="!photoImg && !photoLoading"
+    ng-click="fireCameraUpload()"
+    href
+    class="camera-button"
+  >
+    <i class="icon ion-android-camera"></i>
+  </a>
+
+  <a
+    ng-show="photoImg"
+    ng-click="fireCameraUpload()"
+    href
+    class="camera-button-redo"
+  >
+    <i class="icon ion-android-camera"></i>
+  </a>
+
+  <img
+    ng-if="photoImg"
+    ng-src="{{photoImg}}"
+    class="preview"
+  >
+  <input
+    class="hidden hide"
+    type="file"
+    accept="image/*"
+    capture="camera"
+    id="camera-upload"
+    custom-on-change="handleFileSelect"
+    ng-model="photo.image" />
+</div>
