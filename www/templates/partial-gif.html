@@ -1,0 +1,22 @@
+<div class="gif-area">
+  <form class="gif-area__search" ng-submit="submitGIFSearch()">
+    <input
+      id="gif-search"
+      class="gif-area__search"
+      placeholder="Search GIFs.."
+      type="text"
+      ng-model="searchTerm"
+      ng-change="searchGIF(searchTerm)"
+    />
+  </form>
+  <div class="gif-area__gifs" ng-if="touched && mode === modes.GIF">
+    <div
+      ng-class="{'gif-area__image--active': $root.selectedGIF === url}"
+      ng-click="$root.selectedGIF = url"
+      ng-repeat="url in GIFResults"
+      class="gif-area__image"
+      ng-style="{'background-image':'url(' + url + ')'}"
+    >
+    </div>
+  </div>
+</div>
