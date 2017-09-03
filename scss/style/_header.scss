@@ -20,6 +20,8 @@
     margin: 10px 13px 0 0;
     float: left;
     width: 34px;
+    animation: rotate-in 0.35s ease-out;
+    transform-origin: 56% 50%;
   }
   .title-accent {
     display: none;

@@ -36,7 +36,10 @@
   to { transform: scale(2); opacity: 1; border-radius: 0%;}
 }
 
-
+@keyframes rotate-in {
+  from { transform: rotate(45deg); opacity: 0; }
+  to { transform: rotate(0); opacity: 1; }
+}
 
 @keyframes drop-from-bottom {
   from { transform: translate3d(0, 50%, 0); opacity: 0 }
@@ -67,6 +70,13 @@
   from { transform: scale(0); }
   to { transform: scale(1); }
 }
+
+
+@keyframes scaleX-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 @keyframes scale-in-while-rotated {
   from { transform: scale(0) rotate(30deg); }
   to { transform: scale(1) rotate(30deg); }
