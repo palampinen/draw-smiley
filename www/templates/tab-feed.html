@@ -9,61 +9,97 @@
 
 
   <ion-content class="smiley-feed-content" overflow-scroll="true">
-    <div ng-if="loading" class="loading">
-      <ion-spinner icon="android"></ion-spinner>
-    </div>
+    <div class="smiley-feed compact date-separator">
 
-    <div class="smiley-feed" ng-class="{'compact': !listMode, 'date-separator': showDates}">
       <div class="list">
-        <div
-          class="item item-complex smiley"
-          ng-repeat="(index, item) in orderedItems = (items | orderBy:'added':true) track by item.$id"
-          ng-class="{
-            lastOfDay: !isInSamePeriod(item.added, orderedItems[index + 1].added),
-            firstOfDay: index === 0 || !isInSamePeriod(item.added, orderedItems[index - 1].added)
-          }"
-        >
-          <div class="date-separator__title" ng-if="index === 0 || !isInSamePeriod(item.added, orderedItems[index - 1].added)">
-            {{getPeriodLabel(item.added)}}
-            <span class="date-rating-avg">Avg {{getTotalRatingsForDate(item.added)}}</span>
+        <div class="period">
+
+          <div class="period-header">
+            <div>
+              <button class="button-navigate" ng-disabled="loading" ng-click="loadPrevPeriod()">
+                <i class="icon ion-ios-arrow-back"></i>
+              </button>
+            </div>
+
+            <div class="period__title" ng-if="!loading">
+              <div class="date-separator__title">{{getPeriodLabel()}}</div>
+              <div ng-if="items.length" class="date-rating-avg">Avg {{getTotalRatingsForDate()}}</div>
+            </div>
+            <div class="inline-loader" ng-if="loading">
+              <ion-spinner icon="android"></ion-spinner>
+            </div>
+
+            <div>
+              <button class="button-navigate" ng-disabled="loading || isNextWeekInFuture()" ng-click="loadNextPeriod()">
+                <i class="icon ion-ios-arrow-forward"></i>
+              </button>
+            </div>
+
           </div>
-          <div class="item-content">
-            <div class="item item-avatar item-header">
-              <span class="round-img ion-android-contact"></span>
-              <h2>{{item.nick || '-'}}</h2>
-              <p class="time-ago">{{getTimeAgo(item.added)}}</p>
-              <!--<span class="badge badge-royal" ng-if="item.added > lastChecked"> FRESH</span>-->
-              <span class="rating" ng-if="item.rate"><span class="ion-android-star">{{item.rate}}</span></span>
-            </div>
 
-            <!--  back-img="{{item.gif || item.img}}"  -->
-            <a
-              class="item item-image"
-              ng-href="#/feed/{{item.$id}}"
-              ng-style="{'background-image':'url(' + (item.gif || item.img) + ')'}"
-            ></a>
 
-            <div class="item item-footer">
+
+          <div class="empty-info" ng-if="!loading && !items.length">
+            <span class="empty-state-face">
+              <span class="eye eye--left"></span>
+              <span class="eye eye--right"></span>
+              <span class="mouth"></span>
+            </span>
+            Wow, such empty week
+          </div>
+
+          <div
+            class="item item-complex smiley"
+            ng-repeat="item in periodOrderedItems = (items | orderBy:added:false) track by item.$id"
+          >
+            <div class="item-content">
+              <div class="item item-avatar item-header">
+                <span class="round-img ion-android-contact"></span>
+                <h2>{{item.nick || '-'}}</h2>
+                <p class="time-ago">{{getTimeAgo(item.added)}}</p>
+                <span class="rating" ng-if="item.rate"><span class="ion-android-star">{{item.rate}}</span></span>
+              </div>
+
               <a
-                ng-class="{hasLikes: item.like, 'animation-active': animatingItems[item.$id]}"
-                class="item-icon-left like-counter" href
-                ng-click="item.like = item.like + 1; items.$save(item)"
-              >
-                <span class="ion-android-favorite like-animation"></span>
-                <i class="icon ion-android-favorite-outline"></i>
-                <span class="text">{{item.like}}</span>
-              </a>
+                class="item item-image"
+                ng-href="#/feed/{{item.$id}}"
+                ng-style="{'background-image':'url(' + (item.gif || item.img) + ')'}"
+              ></a>
+
+              <div class="item item-footer">
+                <a
+                  ng-class="{hasLikes: item.like, 'animation-active': animatingItems[item.$id]}"
+                  class="item-icon-left like-counter" href
+                >
+                  <span class="ion-android-favorite like-animation"></span>
+                  <i class="icon ion-android-favorite-outline"></i>
+                  <span class="text">{{item.like}}</span>
+                </a>
+              </div>
             </div>
+          </div>
+
         </div>
-      </div>
+
+      <!--
+        <div ng-if="loading && !items.length" class="loading loading--list">
+          <ion-spinner icon="android"></ion-spinner>
+        </div>
+      -->
       </div>
     </div>
 
-    <ion-infinite-scroll class="infinite" ng-if="!bottomReached" spinner="android" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+
+
+
 
   </ion-content>
 
-  <a ng-href="#/draw" class="button button-calm icon button-round bottom-right ion-android-add" >
+  <a
+    ng-click="resetPeriodNavigation()"
+    ng-href="#/draw"
+    class="button button-calm icon button-round bottom-right ion-android-add"
+  >
   </a>
 
 </ion-view>
