@@ -82,11 +82,38 @@ angular.module('smileyApp.controllers')
     $scope.mode = modes.GIF;
   }
 
+  var delayedGifLoad = null;
   $scope.searchGIF = Helpers.debounce(function(term) {
-    $http.get(`https://api.giphy.com/v1/gifs/search?q=${term}&limit=40&api_key=dc6zaTOxFJmzC`).then(function (results) {
-      $scope.GIFResults = results.data.data.map(function(item) {
+
+    if (!term) {
+      return;
+    }
+
+    $http.get(`https://api.giphy.com/v1/gifs/search?q=${term}&limit=30&api_key=dc6zaTOxFJmzC`).then(function (results) {
+
+      if (delayedGifLoad) {
+        $timeout.cancel(delayedGifLoad);
+      }
+
+      var res = results.data.data;
+      var firstLoad = 6;
+
+      var firstPart = res.slice(0, firstLoad);
+      var secondPart = res.slice(firstLoad, res.length);
+
+      $scope.GIFResults = firstPart.map(function(item) {
         return item.images.downsized.url;
       });
+
+      delayedGifLoad = $timeout(function() {
+        var delayedSetOfGifs = res.map(function(item) {
+          return item.images.downsized.url;
+        });
+        $scope.GIFResults = delayedSetOfGifs;
+
+      }, 100);
+
+
     })
   }, 500);
 
@@ -129,58 +156,35 @@ angular.module('smileyApp.controllers')
 
 
   $scope.fireCameraUpload =  function() { document.getElementById("camera-upload").click() }
+
+  var exifInfo = null;
   $scope.handleFileSelect = function (evt) {
-    var f = evt.target.files[0];
-    var reader = new FileReader();
+    var file = evt.target.files[0];
 
-    $scope.photoImg = null;
+    loadImage.parseMetaData(
+      file,
+      function (data) {
+        exifInfo = data.exif ? data.exif[0x0112] : null;
+      },
+      { maxMetaDataSize: 262144, disableImageHead: false}
+    );
 
-    reader.onload = (function(theFile) {
-      return function(e) {
-        var filePayload = e.target.result;
-
-        var img     = new Image(),
-            width   = 250,
-            height  = 250;
-
-        img.src = filePayload;
-
-        img.onload = function() {
-          var tempW = img.width,
-            tempH = img.height,
-            offsetX = 0,
-            offsetY = 0,
-            limit;
-
-          if (tempW < tempH) {
-            offsetY = (tempH-tempW) / 2;
-            limit = tempW;
-            tempH *= width / tempW;
-            tempW = width;
-          } else {
-            offsetX = (tempW-tempH) / 2;
-            limit = tempH;
-            tempW *= height / tempH;
-            tempH = height;
-          }
-
-          var canvas = document.createElement('canvas');
-
-          /// set its dimension to target size
-          canvas.width = width;
-          canvas.height = height;
-
-          var ctx = canvas.getContext('2d');
-          ctx.drawImage(img, offsetX, offsetY, limit, limit, 0, 0, width, height);
-
-          /// encode image to data-uri with base64 version of compressed image
-          var resizedImg = canvas.toDataURL('image/jpeg', 0.8);
-
-          setPhotoImg(resizedImg);
+    $timeout(function() {
+      loadImage(
+        file,
+        function (img) {
+          var photo = img.toDataURL('image/jpeg', 0.8);
+          setPhotoImg(photo);
+        },
+        {
+          crop: true,
+          maxWidth: 250,
+          maxHeight: 250,
+          canvas: true,
+          orientation: exifInfo
         }
-      };
-    })(f);
-    reader.readAsDataURL(f);
+      );
+    }, 500);
   }
 
 
@@ -194,6 +198,8 @@ angular.module('smileyApp.controllers')
       $scope.touched = false;
       $scope.loading = false;
       $scope.givenRating = null;
+      $scope.photoImg = null;
+
       $state.go('tab.feed');
 
       $timeout(function() {
