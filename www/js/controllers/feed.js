@@ -1,147 +1,188 @@
-angular.module('smileyApp.controllers')
-.controller('FeedCtrl', function($scope, SmileyService, $timeout, User, Helpers) {
-
-  $scope.$on("$ionicView.enter", function(){
-    $timeout(function() {
-      $scope.userName = User.get();
-    })
-  });
-
-  // List mode toggle
-  $scope.listMode = User.getListMode();
-  $scope.toggleListMode = function() {
-    var currentListModeState = $scope.listMode;
-    var nextListModeState = !currentListModeState
-    $timeout(function() {
-      $scope.listMode = nextListModeState;
-      User.setListMode(nextListModeState);
+angular
+  .module("smileyApp.controllers")
+  .controller("FeedCtrl", function(
+    $scope,
+    SmileyService,
+    $timeout,
+    User,
+    Helpers
+  ) {
+    $scope.$on("$ionicView.enter", function() {
+      $timeout(function() {
+        $scope.userName = User.get();
+      });
     });
-  };
 
-  $scope.showDates = true; // User.getShowDatesMode();
-  // $scope.toggleShowDateMode = function() {
-  //   var currentShowDateState = !!$scope.showDates;
-  //   var nextShowDateState = !currentShowDateState
-  //   $timeout(function() {
-  //     $scope.showDates = nextShowDateState;
-  //     User.setShowDatesMode(nextShowDateState);
-  //   });
-  // }
+    // List mode toggle
+    $scope.listMode = false;
 
+    // Show dates
+    $scope.showDates = true;
 
-  // Load content
-  $scope.lastChecked = User.lastChecked();
-  $scope.items = [];
+    var periodLabelFormat = "YYYY-W";
 
-  $scope.loading = true;
-  var unwatch;
-  SmileyService.load(36).$loaded().then(function(data) {
+    // Load content
+    $scope.lastChecked = User.lastChecked();
+    $scope.items = [];
+    var periodAgo = 0;
 
-    unwatch = data.$watch(onItemChange);
+    var getLoadDate = function(periodsAgo) {
+      var ago = periodsAgo || 0;
+      return moment()
+        .startOf("isoWeek")
+        .subtract(ago, "weeks")
+        .valueOf();
+    };
 
-    $scope.items = data;
-    $scope.loading = false;
-  });
+    var unwatch;
+    $scope.loading = true;
 
-  // $scope.$on("$ionicView.leave", function(){
-  //   console.log('unregister watcher');
-  //   unwatch();
-  // });
+    SmileyService.loadBefore(getLoadDate(periodAgo))
+      .$loaded()
+      .then(function(data) {
+        unwatch = data.$watch(onItemChange);
 
+        $scope.items = data;
+        $scope.loading = false;
+      });
 
-  //  Get time passed from last action
-  $scope.getTimeAgo = Helpers.getTimeAgo;
+    // $scope.$on("$ionicView.leave", function(){
+    //   console.log('unregister watcher');
+    //   unwatch();
+    // });
 
-  // Inifinite scroll
-  var loadMoreCount = 0;
-  $scope.bottomReached = false;
-  $scope.loadMore = function() {
+    //  Get time passed from last action
+    $scope.getTimeAgo = Helpers.getTimeAgo;
 
-    if ($scope.bottomReached) {
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-      return false;
-    }
-
-    loadMoreCount += 10;
-    SmileyService.load($scope.items.length + loadMoreCount).$loaded().then(function(data) {
-      if ($scope.items.length === data.length) {
-        $scope.bottomReached = true;
-      } else {
-        $scope.items = data
+    // Load more data
+    loadPeriodData = function(direction) {
+      if ($scope.loading) {
+        return;
       }
 
-      $scope.$broadcast('scroll.infiniteScrollComplete');
+      if (direction) {
+        periodAgo += direction;
+      }
 
-    });
-  }
+      $scope.loading = true;
+      var before = getLoadDate(periodAgo);
+      var after = getLoadDate(periodAgo - 1);
 
-  // Like count change animations
-  $scope.animatingItems = {};
-  var onItemChange = function(changeEvent) {
-    if (changeEvent.event === 'child_changed') {
-      $timeout(function() {
-        $scope.animatingItems[changeEvent.key] = true;
+      SmileyService.loadBefore(before, after)
+        .$loaded()
+        .then(function(data) {
+          $scope.items = data;
+          $scope.loading = false;
+        });
+    };
+
+    $scope.loadPrevPeriod = function() {
+      loadPeriodData(1);
+    };
+    $scope.loadNextPeriod = function() {
+      loadPeriodData(-1);
+    };
+
+    // Like count change animations
+    $scope.animatingItems = {};
+    var onItemChange = function(changeEvent) {
+      if (changeEvent.event === "child_changed") {
         $timeout(function() {
-          delete $scope.animatingItems[changeEvent.key];
-        }, 1000)
-      }, 0);
-    }
-  }
+          $scope.animatingItems[changeEvent.key] = true;
+          $timeout(function() {
+            delete $scope.animatingItems[changeEvent.key];
+          }, 1000);
+        }, 0);
+      }
+    };
 
-  // Period (day, week) based content splitting
-  var periods = {
-    WEEK: 'week',
-    DAY: 'day'
-  };
+    // Period (day, week) based content splitting
+    var periods = {
+      WEEK: "week",
+      DAY: "day"
+    };
 
-  var chosenPeriod = periods.WEEK;
-  var startDate = moment().startOf('week');
-  var prevStartDate = moment().subtract(1, 'week').startOf('week');
+    var chosenPeriod = periods.WEEK;
+    var startDate = moment().startOf("week");
+    var prevStartDate = moment()
+      .subtract(1, "week")
+      .startOf("week");
 
-  var getPeriodFormats = function(period) {
-    switch(period) {
-      case periods.WEEK:
-        return { same: 'This Week', prev: 'Last Week', dateString: 'Week ', dateFormat: 'w' };
+    var getPeriodFormats = function(period) {
+      switch (period) {
+        case periods.WEEK:
+          return {
+            same: "This Week",
+            prev: "Last Week",
+            dateString: "Week ",
+            dateFormat: "w",
+            id: "weeks"
+          };
 
-      case periods.DAY:
-        return { same: 'Today', prev: 'Yesteday', dateString: '', dateFormat: 'ddd D.M.' }
-    }
-  }
+        case periods.DAY:
+          return {
+            same: "Today",
+            prev: "Yesteday",
+            dateString: "",
+            dateFormat: "ddd D.M.",
+            id: "days"
+          };
+      }
+    };
 
-  $scope.isInSamePeriod = function(a, b) {
-    return a && b && moment(a).isSame(moment(b), chosenPeriod);
-  }
+    $scope.isNextWeekInFuture = function() {
+      return periodAgo <= 0;
+    };
 
-  $scope.getPeriodLabel = function(date) {
-    var momentDate = moment(date);
-    var format = getPeriodFormats(chosenPeriod);
+    $scope.isNextWeekInFuture = function() {
+      return periodAgo <= 0;
+    };
 
-    if (momentDate.isSame(startDate, chosenPeriod)){
-      return format.same;
-    }
-    if (momentDate.isSame(prevStartDate, chosenPeriod)){
-      return format.prev;
-    }
-    return format.dateString + momentDate.format(format.dateFormat);
-  }
+    $scope.isInSamePeriod = function(a, b) {
+      return a && b && moment(a).isSame(moment(b), chosenPeriod);
+    };
 
-  $scope.getTotalRatingsForDate = function(date) {
-    var momentDate = moment(date);
-    var totalRatedPostsForDate = ($scope.items || [])
-    .filter(function(smiley) {
-      return smiley.rate && momentDate.isSame(moment(smiley.added), chosenPeriod)
-    });
+    $scope.getPeriodLabel = function() {
+      var format = getPeriodFormats(chosenPeriod);
+      var momentDate = moment().subtract(periodAgo, format.id);
 
-    if (totalRatedPostsForDate.length === 0) {
-      return '-';
-    }
+      if (momentDate.isSame(startDate, chosenPeriod)) {
+        return format.same;
+      }
 
-    var avg = (totalRatedPostsForDate || []).reduce(function(acc, smiley) {
-      return acc + (smiley.rate || 0);
-    }, 0) / totalRatedPostsForDate.length;
+      if (momentDate.isSame(prevStartDate, chosenPeriod)) {
+        return format.prev;
+      }
 
-    return avg.toFixed(1);
-  }
+      return format.dateString + momentDate.format(format.dateFormat);
+    };
 
+    $scope.getTotalRatingsForDate = function(date) {
+      var format = getPeriodFormats(chosenPeriod);
+      var momentDate = moment().subtract(periodAgo, format.id);
 
-});
+      var totalRatedPostsForDate = ($scope.items || []).filter(function(
+        smiley
+      ) {
+        return (
+          smiley.rate && momentDate.isSame(moment(smiley.added), chosenPeriod)
+        );
+      });
+
+      if (totalRatedPostsForDate.length === 0) {
+        return "-";
+      }
+
+      var avg =
+        (totalRatedPostsForDate || []).reduce(function(acc, smiley) {
+          return acc + (smiley.rate || 0);
+        }, 0) / totalRatedPostsForDate.length;
+
+      return avg.toFixed(1);
+    };
+
+    $scope.resetPeriodNavigation = function() {
+      periodAgo = 0;
+      loadPeriodData();
+    };
+  });
