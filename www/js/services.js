@@ -19,6 +19,12 @@ angular.module('smileyApp.services', [])
       var query = ref.orderByChild('added').limitToLast(limit);
       return $firebaseArray(query);
     },
+    loadBefore: function(before, after) {
+      var query = after
+        ? ref.orderByChild('added').startAt(before).endAt(after)
+        : ref.orderByChild('added').startAt(before);
+      return $firebaseArray(query);
+    },
     get: function(id){
       var query = ref.child(id)
       return $firebaseObject(query);
