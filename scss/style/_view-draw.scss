@@ -16,6 +16,10 @@
 
       &.icon {
         font-size: 12px;
+        background: #FFF;
+        &:before {
+          opacity: 0.5;
+        }
         span {
           display: none;
         }
@@ -24,22 +28,26 @@
         font-size: 11px;
         background: $text-color;
         color: #FFF;
-        padding: 2px 3px;
+        padding: 3px 4px 2px;
         border-radius: 3px;
         text-transform: uppercase;
+        opacity: 0.5;
       }
 
       &.active {
-        background: #FFF;
-        // box-shadow: inset 0 -2px 0 $royal;
+        opacity: 1;
+        &.icon:before, .icon-text {
+          transition: opacity 0.2s;
+          opacity: 1;
+        }
         &:after {
           top: auto;
           bottom: 0;
           left: 0;
           right: 0;
-          height: 1px;
+          height: 2px;
           background: $royal;
-          animation: scaleX-in 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+          animation: scaleX-in 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
       }
     }
@@ -65,8 +73,8 @@
   }
 
   .draw-area, .gif-area, .photo-area {
-    top: $bar-height;
-    bottom: $bar-height;
+    top: 51px;
+    bottom: 50px;
   }
 
   .draw-area {
@@ -118,6 +126,7 @@
     width: 48%;
     margin: 0 1%;
 
+    background-color: rgba(black, 0.05);
     background-size: cover;
     background-position: 50% 50%;
   }
@@ -238,6 +247,13 @@
   }
 
   .view--draw {
+
+
+    .draw-area, .gif-area, .photo-area {
+      top: 51px;
+      bottom: 51px;
+    }
+
     .button-bar {
       max-width: 800px;
       margin: 0 auto;

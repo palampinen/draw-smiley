@@ -1,9 +1,6 @@
 
 .smiley-feed-content {
   background: $stable;
-  .scroll {
-
-  }
 }
 
 .line-through {
@@ -28,7 +25,7 @@
   @import "date-separator.scss";
 
   .list {
-    min-height: 100vh;
+    min-height: 60vh;
   }
   &.smiley-feed--not-fixed .list {
     min-height: auto;
@@ -86,7 +83,7 @@
       -webkit-font-smoothing: antialiased;
       color: $dark;
       font-weight: 500;
-      font-size: 16px;
+      font-size: 15px;
       margin-top: -4px;
       margin-bottom: 4px;
     }
@@ -214,7 +211,7 @@
     }
 
     .item-avatar {
-      padding: 12px 12px 8px;
+      padding: 11px 12px 9px;
       &.item-header--no-user {
         padding-bottom: 12px;
       }
@@ -332,7 +329,7 @@
   }
 }
 
-@media screen and (min-width: 1660px) {
+@media screen and (min-width: 1600px) {
   .smiley-feed {
     &.compact {
       .smiley {

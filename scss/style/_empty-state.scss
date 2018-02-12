@@ -1,0 +1,51 @@
+
+.empty-info {
+  padding: 50px 20px;
+  color: #ccc;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2em;
+
+  .empty-state-face {
+    display: block;
+    margin: 0 auto 20px;
+    position: relative;
+    border: 4px solid #ccc;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    animation: drop-from-bottom 0.4s;
+
+    .mouth {
+      display: block;
+      content: '';
+      position: absolute;
+      height: 4px;
+      width: 20px;
+      background: #ccc;
+      left: 50%;
+      margin-left: -10px;
+      bottom: 25px;
+    }
+
+    .eye {
+      background: #ccc;
+      display: block;
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 35px;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      animation: empty-face 6s infinite;
+      animation-delay: 2s;
+    }
+    .eye--right {
+      animation-delay: 2.02s;
+      left: auto;
+      right: 20px;
+    }
+  }
+
+}

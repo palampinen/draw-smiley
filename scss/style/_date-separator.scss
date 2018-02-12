@@ -1,62 +1,16 @@
 
 .date-separator__title {
-  display: none;
-  transform-origin: 0 50%;
-}
-
-&.date-separator {
-  padding-top: 65px !important;
-
-  .lastOfDay {
-    clear: right;
-    margin-bottom: 150px !important;
-  }
-
-  .firstOfDay {
-    clear: left;
-  }
-
-  .date-separator__title {
-    display: block;
-    animation: scale-in 0.4s $smiley-animation;
-    clear: left;
-    position: absolute;
-    top: -55px;
-    font-size: 14px;
-    color: #aaa;
-    font-weight: 600;
-    padding: 20px 0 15px;
-    text-align: center;
-    width: 100%;
-    text-transform: uppercase;
-  }
-
-  &.compact {
-    .date-separator__title {
-      text-align: left;
-    }
-  }
+  display: inline-block;
+  color: #aaa;
+  padding: 0;
+  text-transform: uppercase;
 }
 
 .date-rating-avg {
-  position: absolute;
-  right: 0;
+  display: inline-block;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-left: 30px;
   color: $royal;
 }
 
-@media screen and (max-width: 767px) {
-  &.date-separator {
-    &.compact {
-      .date-separator__title {
-        padding: 20px 5px 15px;
-      }
-    }
-
-    .date-separator__title {
-      font-size: 14px;
-    }
-  }
-  .date-rating-avg {
-    right: 5px;
-  }
-}
