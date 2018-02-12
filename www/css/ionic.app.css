@@ -9960,47 +9960,20 @@ h1.title--account {
     animation: scale-in-while-rotated 0.2s; }
 
 .smiley-feed .date-separator__title {
-  display: none;
-  transform-origin: 0 50%; }
-
-.smiley-feed.date-separator {
-  padding-top: 65px !important; }
-  .smiley-feed.date-separator .lastOfDay {
-    clear: right;
-    margin-bottom: 150px !important; }
-  .smiley-feed.date-separator .firstOfDay {
-    clear: left; }
-  .smiley-feed.date-separator .date-separator__title {
-    display: block;
-    animation: scale-in 0.4s cubic-bezier(0.24, 0.81, 0.24, 1);
-    clear: left;
-    position: absolute;
-    top: -55px;
-    font-size: 14px;
-    color: #aaa;
-    font-weight: 600;
-    padding: 20px 0 15px;
-    text-align: center;
-    width: 100%;
-    text-transform: uppercase; }
-  .smiley-feed.date-separator.compact .date-separator__title {
-    text-align: left; }
+  display: inline-block;
+  color: #aaa;
+  padding: 0;
+  text-transform: uppercase; }
 
 .smiley-feed .date-rating-avg {
-  position: absolute;
-  right: 0;
+  display: inline-block;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-left: 30px;
   color: #46289A; }
 
-@media screen and (max-width: 767px) {
-  .smiley-feed.date-separator.compact .date-separator__title {
-    padding: 20px 5px 15px; }
-  .smiley-feed.date-separator .date-separator__title {
-    font-size: 14px; }
-  .smiley-feed .date-rating-avg {
-    right: 5px; } }
-
 .smiley-feed .list {
-  min-height: 100vh; }
+  min-height: 60vh; }
 
 .smiley-feed.smiley-feed--not-fixed .list {
   min-height: auto;
@@ -10045,7 +10018,7 @@ h1.title--account {
     -webkit-font-smoothing: antialiased;
     color: #504d5b;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     margin-top: -4px;
     margin-bottom: 4px; }
 
@@ -10147,7 +10120,7 @@ h1.title--account {
   animation: drop-from-right 0.6s cubic-bezier(0.24, 0.81, 0.24, 1); }
 
 .smiley-feed.compact .item-avatar {
-  padding: 12px 12px 8px;
+  padding: 11px 12px 9px;
   min-height: 0; }
   .smiley-feed.compact .item-avatar.item-header--no-user {
     padding-bottom: 12px; }
@@ -10228,7 +10201,7 @@ h1.title--account {
     .smiley-feed.compact .smiley .item-image {
       width: auto; } }
 
-@media screen and (min-width: 1660px) {
+@media screen and (min-width: 1600px) {
   .smiley-feed.compact .smiley {
     margin: 0 0 0.5vw 0.5vw;
     width: 8.5vw;
@@ -10250,26 +10223,33 @@ h1.title--account {
       .view--draw .button-bar > .button:before {
         position: relative; }
       .view--draw .button-bar > .button.icon {
-        font-size: 12px; }
+        font-size: 12px;
+        background: #FFF; }
+        .view--draw .button-bar > .button.icon:before {
+          opacity: 0.5; }
         .view--draw .button-bar > .button.icon span {
           display: none; }
       .view--draw .button-bar > .button .icon-text {
         font-size: 11px;
         background: #444;
         color: #FFF;
-        padding: 2px 3px;
+        padding: 3px 4px 2px;
         border-radius: 3px;
-        text-transform: uppercase; }
+        text-transform: uppercase;
+        opacity: 0.5; }
       .view--draw .button-bar > .button.active {
-        background: #FFF; }
+        opacity: 1; }
+        .view--draw .button-bar > .button.active.icon:before, .view--draw .button-bar > .button.active .icon-text {
+          transition: opacity 0.2s;
+          opacity: 1; }
         .view--draw .button-bar > .button.active:after {
           top: auto;
           bottom: 0;
           left: 0;
           right: 0;
-          height: 1px;
+          height: 2px;
           background: #46289A;
-          animation: scaleX-in 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
+          animation: scaleX-in 0.45s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .view--draw .button-bar.fixed-bottom {
       box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
       position: fixed;
@@ -10285,8 +10265,8 @@ h1.title--account {
     top: 0;
     bottom: 0; }
   .view--draw .draw-area, .view--draw .gif-area, .view--draw .photo-area {
-    top: 56px;
-    bottom: 56px; }
+    top: 51px;
+    bottom: 50px; }
   .view--draw .draw-area {
     animation: fade-in-scale-out 0.5s cubic-bezier(0.24, 0.81, 0.24, 1);
     display: flex;
@@ -10326,6 +10306,7 @@ h1.title--account {
     height: 200px;
     width: 48%;
     margin: 0 1%;
+    background-color: rgba(0, 0, 0, 0.05);
     background-size: cover;
     background-position: 50% 50%; }
   .view--draw .gif-area__image--active:after {
@@ -10419,6 +10400,9 @@ h1.title--account {
     transition: box-shadow 0.3s; }
     .draw:hover {
       box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2); }
+  .view--draw .draw-area, .view--draw .gif-area, .view--draw .photo-area {
+    top: 51px;
+    bottom: 51px; }
   .view--draw .button-bar {
     max-width: 800px;
     margin: 0 auto; }
@@ -10607,6 +10591,46 @@ h1.title--account {
     .photo-area .camera-button:hover {
       color: #8769d8; } }
 
+.period-header {
+  height: 60px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto; }
+  .period-header .button-navigate {
+    border: none;
+    background: transparent;
+    color: #aaa;
+    font-size: 25px;
+    border-radius: 50%;
+    width: 40px;
+    line-height: 40px;
+    height: 40px;
+    padding: 2px 0 0;
+    min-height: 0;
+    min-width: 0;
+    transition: all 0.1s; }
+    .period-header .button-navigate:disabled {
+      opacity: 0.3;
+      pointer-events: none; }
+    .period-header .button-navigate:active:not(:disabled) {
+      background: #eee; }
+
+.period__title {
+  font-weight: 600;
+  display: block;
+  padding-top: 3px; }
+
+.period {
+  margin-bottom: 55px; }
+  .period:after {
+    display: table;
+    content: '';
+    clear: both; }
+
 .bar-header {
   border: 0px !important;
   border-bottom-color: transparent !important;
@@ -10614,7 +10638,7 @@ h1.title--account {
   border-bottom: none;
   border-radius: 0;
   background-image: none !important;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.06), 0 3px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.06); }
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.02), 0 3px 1px -2px rgba(0, 0, 0, 0.05), 0 1px 5px 0 rgba(0, 0, 0, 0.03); }
   .bar-header.bar .button.button-icon {
     color: #aaa;
     top: 0px; }
@@ -10687,6 +10711,17 @@ h1.title--account {
   .loading svg, .infinite svg {
     width: 40px;
     height: 40px;
+    stroke: #46289A;
+    fill: #46289A; }
+
+.loading--list.loading {
+  margin-top: 50px; }
+
+.inline-loader {
+  margin-top: 10px; }
+  .inline-loader svg {
+    width: 20px;
+    height: 20px;
     stroke: #46289A;
     fill: #46289A; }
 
@@ -10786,6 +10821,48 @@ h1.title--account {
     margin: 7px 0px 7px 0;
     border-right: 1px solid rgba(0, 0, 0, 0.1); } }
 
+.empty-info {
+  padding: 50px 20px;
+  color: #ccc;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2em; }
+  .empty-info .empty-state-face {
+    display: block;
+    margin: 0 auto 20px;
+    position: relative;
+    border: 4px solid #ccc;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    animation: drop-from-bottom 0.4s; }
+    .empty-info .empty-state-face .mouth {
+      display: block;
+      content: '';
+      position: absolute;
+      height: 4px;
+      width: 20px;
+      background: #ccc;
+      left: 50%;
+      margin-left: -10px;
+      bottom: 25px; }
+    .empty-info .empty-state-face .eye {
+      background: #ccc;
+      display: block;
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 35px;
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      animation: empty-face 6s infinite;
+      animation-delay: 2s; }
+    .empty-info .empty-state-face .eye--right {
+      animation-delay: 2.02s;
+      left: auto;
+      right: 20px; }
+
 .button {
   font-weight: bold; }
 
@@ -10794,8 +10871,8 @@ h1.title--account {
   width: 56px;
   border: none;
   border-radius: 50%;
-  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.3);
   min-height: 0;
   min-width: 0;
   padding: 0;
@@ -10814,8 +10891,8 @@ h1.title--account {
   -webkit-transition: background 0.25s ease-out;
   transition: background 0.25s ease-out; }
   .button.button-round.activated {
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.4); }
+    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 5px rgba(0, 0, 0, 0.3); }
   .button.button-round:before {
     line-height: 52px;
     font-size: 25px; }
@@ -11095,6 +11172,66 @@ h1.title--account {
     opacity: 1; }
   100% {
     opacity: 0; } }
+
+@-webkit-keyframes empty-face {
+  0% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  26% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  28% {
+    border-radius: 2px;
+    width: 12px;
+    height: 2px; }
+  29% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  96% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  98% {
+    border-radius: 2px;
+    width: 12px;
+    height: 2px; }
+  100% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; } }
+
+@keyframes empty-face {
+  0% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  26% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  28% {
+    border-radius: 2px;
+    width: 12px;
+    height: 2px; }
+  29% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  96% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; }
+  98% {
+    border-radius: 2px;
+    width: 12px;
+    height: 2px; }
+  100% {
+    border-radius: 50%;
+    width: 8px;
+    height: 8px; } }
 
 .loading, ion-infinite-scroll .icon-refreshing {
   font-size: 300%;
